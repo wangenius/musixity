@@ -1,0 +1,36 @@
+.margin1 {
+    margin:0 5px 10px;
+}
+
+.br20 {
+    border-radius: 20px !important;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.overVisible {
+    overflow: visible !important;
+}
+.overAuto {
+    overflow: auto !important;
+}
+
+.searchInput{
+    width: 100%;
+    flex: 1;
+    display: block;
+    border: none;
+    line-height:80%;
+    height: inherit;
+    outline: none;
+    background: transparent ;
+    font-size: 16px;
+}
+
+
+
+.noOutLine {
+    outline: none !important;
+}
