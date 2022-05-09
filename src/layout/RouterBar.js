@@ -98,24 +98,13 @@ function RouterBar(props) {
     ]
 
 
-    const ControlBox = styled("div")({
-        width: '100%', maxWidth: 360,display:"flex",overflow:"hidden",height:"60px",padding:"5px"
-    })
+
     const ToolBox = styled("div")({
         width: '100%', maxWidth: 360, bgcolor: 'background.paper',paddingX:"5px"
     })
 
         return (
             <Box id={"toolsBar"} className={props.toolsBarVisible?"toolsBarVisible":props.isHideToolsBar?"disPlayNone":""}>
-                <ControlBox className={props.toolsBarVisible?"card noOutLine disPlayNone":"card noOutLine"}>
-
-                    <Button  sx={{flexGrow:1}} onClick={()=>{navigate("/")}}>
-                        <Home/>
-                    </Button>
-                    <Button sx={{flexGrow:1}} onClick={()=>{navigate(-1)}}>
-                        <ArrowBack/>
-                    </Button>
-                </ControlBox>
 
                 <ToolBox className={"card"}>
                         <List sx={{padding:"10px"}}>

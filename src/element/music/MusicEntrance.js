@@ -25,18 +25,18 @@ function MusicEntrance(props){
     return (
             <Fragment >
                     {/*搜索*/}
-                    <Box className={"musicSearchBar"}>
-                        <Input style={{borderRadius:"20px",paddingLeft:"20px"}} className={"searchInput listButton"} value={value} id="standard-basic" placeholder="Search…" onChange={ (value, e) => {
-                            setValue(value)
-                            setTimeout(()=>{
-                                store.dispatch(changeSearchMsg(value))
-                                navigate("/music/search")
-                            },1000)
-                        } }/>
-                        <IconButton sx={{width:"45px",height:"45px",margin:"10px"}} onClick={toSearch}>
-                            <SearchRounded/>
-                        </IconButton>
-                    </Box>
+                    {/*<Box className={"musicSearchBar"}>*/}
+                    {/*    <Input style={{borderRadius:"20px",paddingLeft:"20px"}} className={"searchInput listButton"} value={value} id="standard-basic" placeholder="Search…" onChange={ (value, e) => {*/}
+                    {/*        setValue(value)*/}
+                    {/*        setTimeout(()=>{*/}
+                    {/*            store.dispatch(changeSearchMsg(value))*/}
+                    {/*            navigate("/music/search")*/}
+                    {/*        },1000)*/}
+                    {/*    } }/>*/}
+                    {/*    <IconButton sx={{width:"45px",height:"45px",margin:"10px"}} onClick={toSearch}>*/}
+                    {/*        <SearchRounded/>*/}
+                    {/*    </IconButton>*/}
+                    {/*</Box>*/}
 
                     {/*内容*/}
                     <Outlet />

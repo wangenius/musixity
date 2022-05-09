@@ -3,7 +3,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import WaitLoad from "../util/WaitLoad";
 import Grid from "@mui/material/Grid";
 import MusicPlaylistButton from "../music/playlist/MusicPlaylistButton";
-import {useEffect, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import {toGetShares, toGetSong} from "../../routers/musicApi";
 import ShareBox from "./ShareBox";
 import {connect} from "react-redux";
@@ -45,9 +45,8 @@ function ShareFlow(props)    {
 
 
     return(
-        <Box>
+        <Fragment>
             <InfiniteScroll
-                className={"overVisible"}
                 dataLength={
                     shares.length
                 }
@@ -61,7 +60,7 @@ function ShareFlow(props)    {
                     </p>
                 }
                 next={getMore}
-
+                scrollableTarget="scrollableDiv"
             >
 
                     {
@@ -77,7 +76,7 @@ function ShareFlow(props)    {
 
 
             </InfiniteScroll>
-        </Box>
+        </Fragment>
     )
 }
 

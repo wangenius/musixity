@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import {
     toGetEveryDayPlaylist,
     toGetHighQualityPlaylist,
@@ -8,7 +8,6 @@ import {
 import MusicPlaylistButton from "./MusicPlaylistButton";
 import Grid from "@mui/material/Grid";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Box from "@mui/material/Box";
 import WaitLoad from "../../util/WaitLoad";
 import {connect} from "react-redux";
 import {breakpoint, useViewport} from "../../../util/viewportContext";
@@ -19,7 +18,6 @@ function MusicPlayListFlow(props){
     const [musicList,setMusicList] =useState([])
     const [hasMore,setHasMore] =useState(true)
     const [isFirst,setIsFirst] =useState(true)
-
     //热门歌单 page
     const [page,setPage] =useState(0)
     //热门歌单 before
@@ -90,15 +88,12 @@ function MusicPlayListFlow(props){
 
         return(
 
-                    <Box sx={{textAlign:"center"}}>
+                    <Fragment>
 
                         {
-
-
                             (type === 2 || type === 1)?
                                 <InfiniteScroll
                                     id={"infiniteScroll"}
-                                    className={"overVisible"}
                                     dataLength={
                                         musicList.length
                                     }
@@ -112,7 +107,7 @@ function MusicPlayListFlow(props){
                                         </p>
                                     }
                                     next={getMore}
-
+                                    scrollableTarget="scrollableDiv"
                                 >
                                     <Grid container spacing={2}>
                                         {
@@ -161,7 +156,7 @@ function MusicPlayListFlow(props){
                         }
 
 
-                    </Box>
+                    </Fragment>
 
 
         )

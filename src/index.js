@@ -5,7 +5,7 @@ import App from './page/router';
 
 import reportWebVitals from './util/reportWebVitals';
 //css
-import "./asset/style/frame.css"
+import "./asset/style/App.css"
 //通知
 import { SnackbarProvider } from 'notistack';
 //导入 provider组件

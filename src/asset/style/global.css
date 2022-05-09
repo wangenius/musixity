@@ -1,5 +1,17 @@
+a {
+    text-decoration: none ;
+    color: white;
+}
 .margin1 {
     margin:0 5px 10px;
+}
+/*可以拖拽*/
+.canDrag{
+    -webkit-app-region: drag;
+}
+
+.canDrag *{
+    -webkit-app-region: no-drag;
 }
 
 .br20 {
@@ -17,20 +29,45 @@
     overflow: auto !important;
 }
 
-.searchInput{
-    width: 100%;
-    flex: 1;
-    display: block;
-    border: none;
-    line-height:80%;
-    height: inherit;
-    outline: none;
-    background: transparent ;
-    font-size: 16px;
+.noOutLine {
+    outline: none !important;
+}
+
+.listButton{
+    border-radius: 20px !important;
+    margin: 2px !important;
+    width: auto !important;
+    flex-grow: 1 !important;
+    display: flex !important;
+    transition: ease-in-out 200ms;
+    /*transition: none !important;*/
+}
+
+.listButton:hover{
+    background-color: var(--color-fill-2) !important;
+}
+
+.menuBar{
+    border-radius: 20px !important;
+    margin: 2px !important;
+    width: auto !important;
+    flex-grow: 1 !important;
+    display: flex !important;
+    overflow: hidden;
+    background-color: var(--color-fill-2) !important;
 }
 
 
+.noHover{
+    background-color: initial !important;
+}
 
-.noOutLine {
-    outline: none !important;
+.fill2{
+    background-color: var(--color-fill-2) !important;
+    transition: ease-in-out 200ms;
+}
+.fill2:hover{
+    background-color: var(--color-fill-3) !important;
+    transition: ease-in-out 200ms;
+
 }

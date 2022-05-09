@@ -1,10 +1,8 @@
 import * as React from 'react';
 import {Outlet} from "react-router-dom";
-import Footer from "../layout/Footer";
 import Header from "../layout/Header";
 import Box from "@mui/material/Box";
-import {useEffect, useState} from "react";
-import Container from "@mui/material/Container";
+import {Fragment, useEffect, useState} from "react";
 import Grid from "@mui/material/Grid";
 import ToolsBar from "../layout/RouterBar";
 import MusicPlayBlock from "../element/music/controlCenter/MusicControlCenter";
@@ -15,15 +13,12 @@ import {changeUser} from "../reducer/userReducer";
 import {handleLikeSongInStore} from "../reducer/likeListReducer";
 import {Affix, BackTop} from "@arco-design/web-react";
 import {breakpoint, useViewport} from "../util/viewportContext";
-import {AppBar, IconButton} from "@mui/material";
-import Toolbar from "@mui/material/Toolbar";
-import {Album, ArrowBack, Backup, Menu, More, Search} from "@mui/icons-material";
 import {useNavigate} from "react-router";
+import {Divider} from "@mui/material";
 
 
 function MainPage(props) {
     const { width } = useViewport();
-    const nav =useNavigate()
     const [isHidePlayController,setIsHidePlayController] = useState(false)
     const [isHideToolsBar,setIsHideToolsBar] = useState(false)
     const [toolsBarVisible,setToolsBarVisible] = useState(false)
@@ -70,80 +65,43 @@ function MainPage(props) {
             setToolsBarVisible(!toolsBarVisible)
         }
     }
-    const handleMusicBar = () => {
-        if (width <= breakpoint.md) {
-            setToolsBarVisible(false)
-            setMusicBarVisible(!musicBarVisible)
-        }
-    }
-
     return (
 
 
-        <Box>
-
-            <Box sx={{position:"relative"}}>
-                <BackTop style={{bottom:80}}/>
 
 
-
+            <Fragment>
                 {/*头部标题栏*/}
-                <Header  />
-                {/*主要面板*/}
+                <Header />
 
-                {
-                    isHidePlayController?<AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
-                        <Toolbar>
-                            <IconButton color="inherit" aria-label="open drawer" onClick={handleToolBar}>
-                                <Menu/>
-                            </IconButton>
+                <Divider variant={"fullWidth"} style={{margin:"0 0 30px"}}/>
 
-                            <Box sx={{ flexGrow: 1 }} />
-                                <IconButton color="inherit" onClick={()=>{nav(-1)}}>
-                                <ArrowBack />
-                            </IconButton>
-                            <IconButton color="inherit" onClick={handleMusicBar}>
-                                <Album />
-                            </IconButton>
-                        </Toolbar>
-                    </AppBar>:""
-                }
+                <Grid container spacing={4} sx={ isHideToolsBar?{display:"block", justifyContent:"center"}:{ justifyContent:"center"}}>
 
-
-
-                <Container maxWidth={"lg"} sx={{paddingBottom:"300px"}}>
-
-
-
-                    <Grid container spacing={4} sx={ isHideToolsBar?{display:"block", justifyContent:"center"}:{ justifyContent:"center"}}>
-
-                        <Grid item sm={0} md={0}>
-                                <Affix offsetTop={86}>
-                                    <ToolsBar handleToolBar={handleToolBar} toolsBarVisible={toolsBarVisible} isHideToolsBar={isHideToolsBar}/>
-                                </Affix>
-                        </Grid>
-
-                        <Grid item sm={12} md={12} lg={7}>
-                            <Outlet />
-                        </Grid>
-
-
-                        <Grid item sm={0} md={0} lg={3}>
-                            <Affix offsetTop={86}>
-                                <MusicPlayBlock musicBarVisible={musicBarVisible} isHidePlayController={isHidePlayController}/>
-                            </Affix>
-                        </Grid>
-
-
-
+                    <Grid item>
+                        <ToolsBar handleToolBar={handleToolBar} toolsBarVisible={toolsBarVisible} isHideToolsBar={isHideToolsBar}/>
                     </Grid>
 
-                </Container>
+                    <Grid item md={7}>
+                        <Box id="scrollableDiv" className={"infiniteFlow"}>
+                            <BackTop
+                                easing={'linear'}
+                                duration={600}
+                                style={{ position: 'fixed', right: 60, bottom: 60 }}
+                                visibleHeight={30}
+                                target={() => document.getElementById('scrollableDiv')}
+                            />
+                            <Outlet />
+                        </Box>
+                    </Grid>
 
-                {/*脚注*/}
-                <Footer />
-            </Box>
-        </Box>
+
+                    <Grid item md={3}>
+                            <MusicPlayBlock musicBarVisible={musicBarVisible} isHidePlayController={isHidePlayController}/>
+                    </Grid>
+
+                </Grid>
+            </Fragment>
     );
 }
 

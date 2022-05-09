@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import {useEffect, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import {toGetTopArtist} from "../../../routers/musicApi";
 import Button from "@mui/material/Button";
 import WaitLoad from "../../util/WaitLoad";
@@ -52,7 +52,7 @@ export function ArtistsFlow(){
 
 
     return(
-        <Box  sx={{textAlign:"center"}}>
+        <Fragment>
             <Space >
                 <Select
                     placeholder='选择地区'
@@ -80,25 +80,9 @@ export function ArtistsFlow(){
 
 
 
-
-            <Box sx={{minHeight:"300px"}}>
-                {/*{*/}
-                {/*    result.map((item,key) => {*/}
-                {/*        return (*/}
-                {/*            <ArtistListItem key={key} num={key} item={item}/>*/}
-                {/*        )*/}
-                {/*    }) || <WaitLoad/>*/}
-                {/*}*/}
-                {/*<Button variant={"text"} onClick={viewMore}>*/}
-                {/*    {"查看更多"}*/}
-                {/*</Button>*/}
-
-
-
                 {
                     <InfiniteScroll
                         id={"infiniteScroll"}
-                        className={"overVisible"}
                         dataLength={
                             result.length
                         }
@@ -112,7 +96,7 @@ export function ArtistsFlow(){
                             </p>
                         }
                         next={getMore}
-
+                        scrollableTarget="scrollableDiv"
                     >
 
                         {
@@ -128,10 +112,6 @@ export function ArtistsFlow(){
                 }
 
 
-
-            </Box>
-
-
-        </Box>
+        </Fragment>
     )
 }

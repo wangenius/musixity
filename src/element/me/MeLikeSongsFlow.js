@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import {connect} from "react-redux";
-import {useEffect, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import {
     toGetAllSongsInPlaylist,
     toGetUserPlaylist
@@ -63,12 +63,10 @@ function MeLikeSongsFlow(props){
 
 
     return(
-        <Box>
-
+        <Fragment>
             {
                 <InfiniteScroll
                     id={"infiniteScroll"}
-                    className={"overVisible"}
                     dataLength={
                         songs.length
                     }
@@ -82,7 +80,7 @@ function MeLikeSongsFlow(props){
                         </p>
                     }
                     next={getMore}
-
+                    scrollableTarget="scrollableDiv"
                 >
 
                         {
@@ -98,7 +96,7 @@ function MeLikeSongsFlow(props){
             }
 
 
-        </Box>
+        </Fragment>
     )
 }
 

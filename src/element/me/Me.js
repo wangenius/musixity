@@ -56,7 +56,7 @@ function Me(props){
     }
 
     return (
-        <Fragment>
+        <Box>
         <UserInfoCard className={"card"}>
             {
                 <img className={"hoverImg"} style={{height: "220px",maxHeight:"220px",minHeight:"220px",minWidth:"220px",maxWidth:"220px",background:"transparent",border:"none",margin:"20px",borderRadius:"15px",overflow:"hidden"}}
@@ -89,7 +89,7 @@ function Me(props){
 
             <MeLikeSongsFlow />
 
-        </Fragment>
+        </Box>
     )
 }
 

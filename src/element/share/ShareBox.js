@@ -37,7 +37,7 @@ export default function ShareBox(props){
     },[props.item.json])
 
     return(
-        <Share className={"card hover"}>
+        <Share className={"card hover"} sx={{textAlign:'left'}}>
 
             <Box sx={{display:"flex",paddingTop:"5px"}}>
                 <Button sx={{height:"60px",borderRadius:"20px",paddingX:"20px"}} variant={"text"}>

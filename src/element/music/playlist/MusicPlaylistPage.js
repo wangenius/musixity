@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import {toGetAllSongsInPlaylist, toGetPlaylistDetails} from "../../../routers/musicApi";
 import {Card, CardMedia, List} from "@mui/material";
-import {useEffect, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import WaitLoad from "../../util/WaitLoad";
 import { connect } from 'react-redux';
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -55,42 +55,41 @@ function MusicPlaylistPage(props){
 
 
         return(
-            <Box>
+            <Fragment>
 
                 <PlaylistCover name={list.name} imgUrl={list.coverImgUrl} description={list.trackCount + "首"} />
 
-                <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
 
-                    <InfiniteScroll
-                        className={"overVisible"}
-                        dataLength={
-                            song.length
+                <InfiniteScroll
+                    className={"overVisible"}
+                    dataLength={
+                        song.length
+                    }
+                    loader={
+                        <WaitLoad />
+                    }
+                    hasMore={hasMore}
+                    endMessage={
+                        <p style={{ textAlign: "center" }}>
+                            Yay! You have seen it all
+                        </p>
+                    }
+                    next={getMore}
+                    scrollableTarget="scrollableDiv"
+                >
+
+                        {
+                            song.map((item, key) => {
+                                return (
+
+                                        <PlayListSongItem key={key} playlist={song} num={key} item={item}/>
+
+                                )
+                            })
                         }
-                        loader={
-                            <WaitLoad />
-                        }
-                        hasMore={hasMore}
-                        endMessage={
-                            <p style={{ textAlign: "center" }}>
-                                Yay! You have seen it all
-                            </p>
-                        }
-                        next={getMore}
+                </InfiniteScroll>
 
-                    >
-
-                            {
-                                song.map((item, key) => {
-                                    return (
-
-                                            <PlayListSongItem key={key} playlist={song} num={key} item={item}/>
-
-                                    )
-                                })
-                            }
-                    </InfiniteScroll>
-                </List>
-            </Box>
+            </Fragment>
         )
 
 }
