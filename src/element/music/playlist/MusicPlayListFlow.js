@@ -11,6 +11,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import WaitLoad from "../../util/WaitLoad";
 import {connect} from "react-redux";
 import {breakpoint, useViewport} from "../../../util/viewportContext";
+import LoadOver from "../../util/LoadOver";
 
 
 function MusicPlayListFlow(props){
@@ -87,12 +88,11 @@ function MusicPlayListFlow(props){
 
 
         return(
-
                     <Fragment>
-
                         {
                             (type === 2 || type === 1)?
                                 <InfiniteScroll
+                                    style={{padding:"20px"}}
                                     id={"infiniteScroll"}
                                     dataLength={
                                         musicList.length
@@ -113,7 +113,7 @@ function MusicPlayListFlow(props){
                                         {
                                             musicList.map((item,key) => {
                                                     return (
-                                                        <Grid key={key} item xs={(width > breakpoint.md)?3:6}>
+                                                        <Grid key={key} item xs={width>breakpoint.lg - 1?12/8:width>breakpoint.mdd?2:2.4}>
                                                             <MusicPlaylistButton type={type} data={item}/>
                                                         </Grid>
                                                     )
@@ -125,11 +125,11 @@ function MusicPlayListFlow(props){
 
 
                                 (type === 3)?
-                                    <Grid container spacing={2}>
+                                    <Grid container  style={{padding:"20px"}} spacing={2}>
                                         {
                                             musicList.map((item,key) => {
                                                     return (
-                                                        <Grid key={key} item xs={(width > breakpoint.md)?3:6}>
+                                                        <Grid key={key} item xs={width>breakpoint.lg - 1?12/8:width>breakpoint.mdd?2:2.4}>
                                                             <MusicPlaylistButton type={type} data={item}/>
                                                         </Grid>
                                                     )
@@ -139,23 +139,21 @@ function MusicPlayListFlow(props){
 
                                     </Grid>:
                                     (type === 4)?
-                                        <Grid container spacing={2}>
+                                        <Grid container  style={{padding:"20px"}} spacing={2}>
                                             {
                                                 musicList.map((item,key) => {
                                                         return (
-                                                            <Grid key={key} item xs={(width > breakpoint.md)?3:6}>
+                                                            <Grid key={key} item xs={width>breakpoint.lg - 1?12/8:width>breakpoint.mdd?2:2.4}>
                                                                 <MusicPlaylistButton type={type} data={item}/>
                                                             </Grid>
                                                         )
                                                     }
                                                 )
                                             }
-
                                         </Grid>
                                         :""
                         }
-
-
+                        <LoadOver/>
                     </Fragment>
 
 

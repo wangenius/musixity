@@ -17,7 +17,7 @@ export function CommentBox(props){
     },[props.id])
 
     return(
-        <Card className={props.isFull?"commentFull card": "card"}>
+        <Box className={props.isFull?"commentFull card": "card"}>
             {
                 (comments !== [])?
                 comments.map((item,key)=>{
@@ -51,6 +51,6 @@ export function CommentBox(props){
                     )
                 }):""
             }
-        </Card>
+        </Box>
     )
 }

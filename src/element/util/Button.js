@@ -1,8 +1,11 @@
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {Fragment} from "react";
+import {Fragment, useEffect} from "react";
+import {IconButton} from "@mui/material";
 
-export default function btn(props){
+export default function Btn(props){
+    useEffect(()=>{
+
+    })
 
     return(
             <Fragment>
@@ -17,7 +20,7 @@ export default function btn(props){
                             </Typography>
                         </button>:
                         <button  className={"btn"} onClick={props.onClick}>
-                            {props.icon}
+                                {props.icon}
                         </button>
 
                 }

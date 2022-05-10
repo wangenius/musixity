@@ -27,6 +27,7 @@ import {changeArtistState} from "../../../reducer/artistReducer";
 import {useNavigate} from "react-router";
 import {changeSong} from "../../../reducer/musicReducer";
 import {changeRepeatPlay} from "../../../reducer/repeatPlayReducer";
+import {Tabs} from "@arco-design/web-react";
 
 
 function MusicControlCenter(props){
@@ -35,7 +36,6 @@ function MusicControlCenter(props){
     const [url,setUrl] = useState("")
     const [song,setSong] = useState({})
 
-    const [isLyric,setIsLyric] = useState(true)
     const [isFull,setIsFull] = useState(false)
 
     const [playlist,setPlaylist] = useState(props.playlistReducer.playlist.map(item=>item.id))
@@ -55,7 +55,7 @@ function MusicControlCenter(props){
     const [duration, setDuration] = useState(200);
 
     const audio = document.getElementById("musicAudio")
-
+    const TabPane = Tabs.TabPane;
 
     //播放列表初始化
     useEffect(()=>{
@@ -178,21 +178,15 @@ function MusicControlCenter(props){
 
 
         return (
-            <Box id={"musicControlCenter"} className={props.musicBarVisible?"musicBarVisible":props.isHidePlayController?"disPlayNone":isFull?"musicControlCenterFull":""}>
+            <Box className={isFull?"musicControlCenterFull musicControl":"musicControl"}>
                 <audio id={"musicAudio"} autoPlay src={url}/>
 
-                {isAudioLoad?
-            <Card
-                className={  isFull?"musicControlBarFull card":   "card"}
-                style={{cursor:"default",position:"relative"}}
-            >
-                {
-                    <img className={"shadowImg"} style={isFull?{width: "80%", height: "auto",minWidth:"220px",margin:"10%",border:"none",borderRadius:"15px",overflow:"hidden"}:{width: "220px", height: "220px",minWidth:"220px",background:"transparent",border:"none",margin:"20px",borderRadius:"15px",overflow:"hidden"}}
-                         src={(song.hasOwnProperty("al"))? song.al.picUrl :""}
-                         alt={""}/>
-                }
+                <img className={isFull?"coverImg coverImgFull shadowImg":"coverImg shadowImg"}
+                     src={(song.hasOwnProperty("al"))? song.al.picUrl:""}
+                     alt={""}/>
 
-                <Box sx={isFull?{margin:"10px 0 10px 10%"}:{margin:"10px 0 15px 20px"}}>
+
+                <Box sx={isFull?{margin:"10px 0 10px 10%"}:{textAlign:"left",margin:"10px 0 15px 20px"}}>
                     <Typography variant="h5" component="h2">
                         {song.hasOwnProperty("name") ?
                             song.name
@@ -218,9 +212,18 @@ function MusicControlCenter(props){
 
                 </Box>
 
+                {/*歌词*/}
+                {/*<Tabs type={"text"} tabPosition={"bottom"} size={"small"}>*/}
+                {/*    <TabPane key='1' title='歌词' >*/}
+                        <LyricBox isFull={isFull} id={props.musicReducer.song.id} position={position} handleLyric={handleLyric}/>
+                    {/*</TabPane>*/}
+                    {/*<TabPane key='2' title='评论'>*/}
+                        {/*<CommentBox isFull={isFull} id={props.musicReducer.song.id}/>*/}
+                {/*    </TabPane>*/}
+                {/*</Tabs>*/}
 
-
-                <Box sx={isFull?{marginTop:"120px",paddingX:"20px",}:{paddingX:"20px",marginBottom:"70px"}}>
+                {/*控制*/}
+                <Box sx={{position:'absolute',bottom:"80px",width:"320px"}}>
                     <Slider
                         aria-label="time-indicator"
                         size="small"
@@ -232,21 +235,17 @@ function MusicControlCenter(props){
                             audio.currentTime = e.target.value;
                         }}
                         sx={{
-                            color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
+                            color: "var(--color-6)",
                             height: 4,
                             '& .MuiSlider-thumb': {
                                 width: 8,
                                 height: 8,
                                 transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
                                 '&:before': {
-                                    boxShadow: '0 2px 12px 0 rgba(0,0,0,0.4)',
+                                    boxShadow: '0 2px 12px 0 var(--shadow-color)',
                                 },
                                 '&:hover, &.Mui-focusVisible': {
-                                    boxShadow: `0px 0px 0px 8px ${
-                                        theme.palette.mode === 'dark'
-                                            ? 'rgb(255 255 255 / 16%)'
-                                            : 'rgb(0 0 0 / 16%)'
-                                    }`,
+                                    boxShadow: `0px 0px 0px 8px var(--shadow-color)`,
                                 },
                                 '&.Mui-active': {
                                     width: 20,
@@ -269,9 +268,6 @@ function MusicControlCenter(props){
                         <TinyText>{formatDuration(position)}</TinyText>
                         <TinyText>{formatDuration(duration)}</TinyText>
                     </Box>
-
-
-
 
                     <Box sx={{width:"100%",textAlign: 'center'}}>
                         <IconButton size={"small"} sx={{marginX:"2px"}} onClick={()=>{
@@ -296,44 +292,15 @@ function MusicControlCenter(props){
                             {isFull?<CloseFullscreen sx={{height:15,width:15}}/>:<OpenInFull sx={{height:15,width:15}} />}
                         </IconButton>
                     </Box>
-
                 </Box>
 
-
-
-
-
-                    <Box>
-
-                    <Box sx={{position:"absolute",bottom:"20px",right:"20px"}}>
-
-                        <Button startIcon={(isLyric)?<Comment />:<Lyrics/>} onClick={()=>{
-                            setIsLyric(!isLyric)
-                        }}>
-                            {(isLyric)?"评论":"歌词"}
-                        </Button>
-                        {(props.userReducer.user !== null)?
-                        <Button startIcon={isLike ? <Favorite />:<FavoriteBorder />} onClick={isLike?handleDislikeSong: handleLikeSong}>
-                            {isLike ? "已喜欢":"喜欢"}
-                        </Button>:""}
-                    </Box>
-                    </Box>
-
-
-
-            </Card>
-                    :""
-                }
-                {
-                    (props.musicReducer.song !== undefined && props.musicReducer.song.id !== undefined) ?
-
-                    (isLyric) ?
-                        <LyricBox isFull={isFull} id={props.musicReducer.song.id} position={position} handleLyric={handleLyric}/>
-                        :
-                        <CommentBox isFull={isFull} id={props.musicReducer.song.id}/>
-
-                :""
-                }
+                {/*喜欢*/}
+                <Box sx={{position:"absolute",bottom:"20px",right:"20px"}}>
+                    {(props.userReducer.user !== null)?
+                    <Button startIcon={isLike ? <Favorite />:<FavoriteBorder />} onClick={isLike?handleDislikeSong: handleLikeSong}>
+                        {isLike ? "已喜欢":"喜欢"}
+                    </Button>:""}
+                </Box>
 
             </Box>
 

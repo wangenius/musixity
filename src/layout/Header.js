@@ -1,20 +1,13 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import {useNavigate} from "react-router";
 import Box from "@mui/material/Box";
-import {useEffect, useState} from "react";
 import {connect} from "react-redux";
-import {
-    ArrowBack,
-    Close,
-    Home,
-    HorizontalRule,
-    UnfoldMore
-} from "@mui/icons-material";
+import {ArrowBack, Close, Fullscreen, FullscreenExit, Home, HorizontalRule, Settings,} from "@mui/icons-material";
 import store from "../reducer/store";
 import {changeSearchMsg} from "../reducer/searchReducer";
 import {Input} from "@arco-design/web-react";
 import Button from "../element/util/Button";
-const {ipcRenderer}  = window.electron;
 
 
 function Header(props) {
@@ -22,12 +15,37 @@ function Header(props) {
     const [isLog,setIsLog] = useState(false);
     const [user,setUser] = useState({});
     const [value,setValue] = useState("")
+    const [isMaxFull,setIsMaxFull] = useState(false)
 
     //
     // const toSearch = () => {
     //     store.dispatch(changeSearchMsg(value))
     //     navigate("/music/search")
     // }
+
+    let minimize = () => {}
+    let minToTray = () => {}
+    let maxToFull = () => {}
+    let fullScreen = () => {}
+    try{
+        const {ipcRenderer}  = window.electron;
+        minimize = () => {
+            ipcRenderer.send('window-minimize')
+        }
+        minToTray = () => {
+            ipcRenderer.send('window-minToTray')
+        }
+        maxToFull = () => {
+            ipcRenderer.send('window-maxToFull')
+            setIsMaxFull(!isMaxFull)
+        }
+        fullScreen = () => {
+            ipcRenderer.send('window-fullScreen')
+        }
+
+    }catch (err){
+        console.log(err)
+    }
 
     useEffect(()=>{
         if (props.userReducer.user !==null && props.userReducer.user.hasOwnProperty("nickname")){
@@ -51,7 +69,7 @@ function Header(props) {
                     className={"searchInput"}
                     style={{flexGrow:1}}
                     allowClear
-                    placeholder='Search what your want'
+                    placeholder='搜索'
                     value={value}
                     onChange={ (value, e) => {
                              setValue(value)
@@ -70,9 +88,11 @@ function Header(props) {
                     :
                     <Button onClick={() => navigate("/login")}  sx={{fontSize:"15px"}} name={"LOGIN"}/>
             }
-            <Button icon={<HorizontalRule/>} onClick={()=>{ipcRenderer.send('window-minimize')}}/>
-            <Button icon={<UnfoldMore />} onClick={()=>{ipcRenderer.send('window-minToTray')}}/>
-            <Button icon={<Close/>} onClick={()=>{ipcRenderer.send('window-minToTray')}}/>
+            <Button icon={<Settings/>} onClick={()=>{}}/>
+            <Button icon={<HorizontalRule/>} onClick={minimize}/>
+            {/*<Button icon={<CheckBoxOutlineBlank />} onClick={maxToFull}/>*/}
+            <Button icon={isMaxFull?<FullscreenExit />:<Fullscreen />} onClick={maxToFull}/>
+            <Button icon={<Close/>} onClick={minToTray}/>
         </Box>
     );
 }

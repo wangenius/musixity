@@ -58,14 +58,16 @@ function UsersPage(props){
                 </Box>
             </UserInfoCard>
 
+            <Box style={{padding:"20px"}}>
+                {
+                    playlist.slice(1,playlist.length).map((item,key)=>{
+                        return(
+                            <PlaylistItem key={key} num={key} item={item} />
+                        )
+                    })
+                }
 
-            {
-                playlist.slice(1,playlist.length).map((item,key)=>{
-                    return(
-                        <PlaylistItem key={key} num={key} item={item} />
-                    )
-                })
-            }
+            </Box>
 
         </Fragment>
     )

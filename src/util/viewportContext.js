@@ -34,5 +34,6 @@ export const breakpoint = {
     xs:768,
     sm:992,
     md:1200,
+    mdd:1600,
     lg:1920,
 };

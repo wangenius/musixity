@@ -63,7 +63,7 @@ function ArtistPage(props){
             </FormControl>
 
 
-            <Box>
+            <Box style={{padding:"20px"}}>
                 {
                     (value === "1" && songs !== undefined)?
                         <Box>

@@ -16,9 +16,9 @@ export function PlaylistCover(props){
 
 
     return(
-        <Card
+        <Box
             className={"card"}
-            style={{ marginTop: 16,display:"flex",cursor:"default",position:"relative"}}
+            style={{display:"flex",cursor:"default",position:"relative"}}
         >
             {
 
@@ -45,6 +45,6 @@ export function PlaylistCover(props){
                     喜欢
                 </Button>
             </Box>
-        </Card>
+        </Box>
     )
 }

@@ -8,6 +8,7 @@ import {useNavigate} from "react-router";
 import {changeAlbum} from "../../../reducer/albumReducer";
 import store from "../../../reducer/store";
 import {connect} from "react-redux";
+import {Image} from "@arco-design/web-react";
 
 
 function MusicPlaylistButton(props)  {
@@ -25,12 +26,23 @@ function MusicPlaylistButton(props)  {
                             <Box className={"imgBox"} onClick={()=>{
                                 handleClickPlaylist(props.data.id)
                             }}>
-                                <Chip className={"imgChip"} size={"small"} icon={<PlayCircleFilledWhite/>} label={numberToWan((props.type === 1 || props.type === 2 || props.type === 3)?props.data.playCount:props.data.playcount)} />
-                                <img className={"imgBoxItem"}
-                                     src={(props.type === 1 || props.type === 2)?props.data.coverImgUrl:(props.type === 3 || props.type === 4)?props.data.picUrl:""}
-                                     alt={props.data.name}
+                                <Chip  className={"imgChip"} size={"small"} icon={<PlayCircleFilledWhite/>} label={numberToWan((props.type === 1 || props.type === 2 || props.type === 3)?props.data.playCount:props.data.playcount)} />
+
+
+
+                                <Image
+                                    style={{zIndex:0}}
+                                    height={"150px"}
+                                    width={"150px"}
+                                     src={(props.type === 1 || props.type === 2) ? props.data.coverImgUrl : (props.type === 3 || props.type === 4) ? props.data.picUrl : ""}
                                      loading="lazy"
+                                     alt={""}
                                 />
+
+
+
+
+
                             </Box>
                             <Box  sx={{fontSize:"13px",paddingX:"5px",height:"40px",overflow:"hidden"}}>
                                 {props.data.name}

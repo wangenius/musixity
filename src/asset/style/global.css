@@ -1,6 +1,6 @@
 a {
     text-decoration: none ;
-    color: white;
+    color: var(--color);
 }
 .margin1 {
     margin:0 5px 10px;
@@ -25,6 +25,7 @@ a {
 .overVisible {
     overflow: visible !important;
 }
+
 .overAuto {
     overflow: auto !important;
 }
@@ -33,41 +34,3 @@ a {
     outline: none !important;
 }
 
-.listButton{
-    border-radius: 20px !important;
-    margin: 2px !important;
-    width: auto !important;
-    flex-grow: 1 !important;
-    display: flex !important;
-    transition: ease-in-out 200ms;
-    /*transition: none !important;*/
-}
-
-.listButton:hover{
-    background-color: var(--color-fill-2) !important;
-}
-
-.menuBar{
-    border-radius: 20px !important;
-    margin: 2px !important;
-    width: auto !important;
-    flex-grow: 1 !important;
-    display: flex !important;
-    overflow: hidden;
-    background-color: var(--color-fill-2) !important;
-}
-
-
-.noHover{
-    background-color: initial !important;
-}
-
-.fill2{
-    background-color: var(--color-fill-2) !important;
-    transition: ease-in-out 200ms;
-}
-.fill2:hover{
-    background-color: var(--color-fill-3) !important;
-    transition: ease-in-out 200ms;
-
-}

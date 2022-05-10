@@ -1,0 +1,37 @@
+/* variable.css*/
+:root.light{
+    --color: #333333;
+    --background-color: #FFFFFF;
+
+}
+:root.arcoBlue{
+    --color: #333333;
+    --background-color: #FFFFFF;
+    --color-1: #E8F3FF;
+    --color-2: #BEDAFF;
+    --color-3: #94BFFF;
+    --color-4: #6AA1FF;
+    --color-5: #4080FF;
+    --color-6: #165DFF;
+    --color-7: #0E42D2;
+    --color-8: #072CA6;
+    --color-9: #031A79;
+    --color-10: #000D4D;
+    --shadow-color:rgba(100,100,100,0.1);
+    --gray1-1: #f7f8fa;
+    --gray1-2: #f2f3f5;
+    --gray1-3: #e5e6eb;
+    --gray1-4: #c9cdd4;
+    --gray1-5: #a9aeb8;
+    --gray1-6: #86909c;
+    --gray1-7: #6b7785;
+    --gray1-8: #4e5969;
+    --gray1-9: #272e3b;
+    --gray1-10: #1d2129;
+}
+
+:root.dark {
+    --color: #FFFFFF;
+    --background-color: #000000;
+
+}

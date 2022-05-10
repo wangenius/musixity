@@ -66,6 +66,7 @@ function MeLikeSongsFlow(props){
         <Fragment>
             {
                 <InfiniteScroll
+                    style={{padding:"20px"}}
                     id={"infiniteScroll"}
                     dataLength={
                         songs.length

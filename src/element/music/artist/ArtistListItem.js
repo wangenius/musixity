@@ -13,21 +13,20 @@ export function ArtistListItem(props){
         store.dispatch(changeArtistState(artist))
         nav("/music/artist")
     }
-
     return(
-        <Box sx={{display:"flex"}}>
+        <Box sx={{display:"flex",flex:0.5}}>
             <Box sx={{textAlign:"center", marginX:"5px",width:"20px",display:"inline-block",lineHeight:"80px"}}>
                 {props.num + 1}
             </Box>
             <ListItemButton className={"listButton"}  onClick={()=>{
                 handleClickOnArtist(props.item)
             }}>
-                <ListItemAvatar>
-                    <Avatar>
-                        <img style={{width: "inherit", height: "inherit"}} src={props.item.picUrl}
-                             alt={<QueueMusicOutlined/>}/>
-                    </Avatar>
-                </ListItemAvatar>
+                {/*<ListItemAvatar>*/}
+                {/*    <Avatar>*/}
+                {/*        <img style={{width: "inherit", height: "inherit"}} src={props.item.picUrl}*/}
+                {/*             alt={<QueueMusicOutlined/>}/>*/}
+                {/*    </Avatar>*/}
+                {/*</ListItemAvatar>*/}
                 <ListItemText primary={props.item.name} secondary={props.item.alias}/>
             </ListItemButton>
         </Box>

@@ -20,21 +20,27 @@ import FriendsFlow from "../element/friend/FriendsFlow";
 import FriendsEntrance from "../element/friend/FriendsEntrance";
 import UsersPage from "../element/friend/UsersPage";
 import HistoryEntrance from "../element/history/HistoryEntrance";
+import {useEffect} from "react";
 
 
 
 
 
 export default function router(props) {
+
+
+
+
     return (
-        <ThemeProvider theme={theme}>
-            <BrowserRouter>
+
+            <HashRouter>
                 <Routes >
 
                     {/*主要页面*/}
                     <Route path="/" exact={true} element={<MainPage />}>
 
                         <Route index element={<Navigate to={"/music"}/>}/>
+                        <Route  path="/index" element={<Navigate to={"/music"}/>}/>
 
                         <Route path="music"  element={<MusicModel />}>
 
@@ -89,8 +95,8 @@ export default function router(props) {
                     {/*无法查找页面*/}
                     <Route path="/*" element={<NoContentPage />} />
                 </Routes>
-            </BrowserRouter>
-        </ThemeProvider>
+            </HashRouter>
+
     );
 }
 

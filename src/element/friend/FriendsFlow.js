@@ -27,7 +27,7 @@ function FriendsFlow(props){
 
 
     return(
-        <Fragment>
+        <Box style={{padding:"20px 20px 200px"}}>
 
             {
                 friends.map((item,key)=>{
@@ -37,7 +37,7 @@ function FriendsFlow(props){
                 })
             }
 
-        </Fragment>
+        </Box>
     )
 }
 const mapStateToProps = (state) => ({ userReducer: state.userReducer, musicReducer: state.musicReducer});

@@ -1,8 +1,23 @@
+@import "variable.css";
+
+/* 定义字体 */
+@font-face{
+  font-family: h_Regular;
+  src: url("../font/HarmonyOS Sans/HarmonyOS_Sans/HarmonyOS_Sans_Regular.ttf");
+}
+
+@font-face{
+  font-family: h_Medium;
+  src: url("../font/HarmonyOS Sans/HarmonyOS_Sans/HarmonyOS_Sans_Medium.ttf");
+}
+@font-face{
+  font-family: h_Bold;
+  src: url("../font/HarmonyOS Sans/HarmonyOS_Sans/HarmonyOS_Sans_Bold.ttf");
+}
 
 *{
   padding: 0;
   margin: 0;
-
 }
 
 body {
@@ -17,13 +32,14 @@ body {
 
 /*窗口根元素*/
 #root{
-  margin: 18px;
-  height: 860px;
-  background-color: white;
-  border-radius: 20px;
-  border: solid 1px gainsboro;
-  box-shadow: 1px 1px 20px 1px rgba(200,200,200,0.5);
+  height: 100vh;
+  background-color: var(--background-color);
+  border-radius: 15px;
+  border: solid 1px var(--shadow-color);
+  box-sizing: border-box;
+  /*box-shadow: 1px 1px 20px 1px var(--shadow-color);*/
   overflow: hidden;
+  font-family: "h_Medium",sans-serif;
 }
 /*隐藏滚动条*/
 ::-webkit-scrollbar {
@@ -32,7 +48,7 @@ body {
 
 /*无限滚东*/
 .infiniteFlow{
-  height: 800px;
+  height: 100vh;
   overflow: scroll;
   overflow-x: visible;
   text-align: center;
@@ -72,51 +88,42 @@ body {
   justify-items: center;
   align-items: center;
   border-radius: 50%;
+  transition: linear 150ms;
 }
 
 .btn:hover{
-  background-color: var(--color-fill-2) ;
+  background:var(--color-1) 2%;
   cursor: pointer;
-
+  transition: linear 150ms;
 }
 .btn svg {
-  color: #6b7785;
+  width: 20px;
+  height: 20px;
+  color: var(--color-6);
 }
 
-.MainTitle {
-  user-select: none;
-  cursor: pointer;
-  width: fit-content;
+.routerBar{
+  border-right: 1px solid var(--shadow-color);
 }
+.musicControl{
+  min-width: 320px;
+  max-width: 320px;
+  padding: 0 10px;
+  border-left: 1px solid var(--shadow-color);
+}
+
 
 .card {
-  margin:0 5px 10px;
-  border-radius: 20px !important;
-  box-shadow: none !important;
-  border: 1px solid rgba(220, 220, 220, 0.45);
+  margin:20px;
+  border-radius: 20px;
+  box-shadow: none;
+  border: 1px solid var(--shadow-color);
+  display: block;
 }
 
-.ListItem {
-  margin:0 5px 10px !important;
-  padding: 10px;
-  border-radius: 20px !important;
-  border: solid 1px gainsboro !important;
-}
-
-.ListItem:hover {
-  background-color: rgba(73,73,73,0.03);
-}
-
-
-
-
-
-Button {
-  text-transform: none !important;
-}
 
 .imgBox {
-  height: auto;
+  /*height: auto;*/
   grid-column-end: span 1;
   grid-row-end: span 1;
   display: inline-block;
@@ -128,59 +135,53 @@ Button {
   margin: 0 5px 10px;
   border-radius: 16px !important;
   box-shadow: none !important;
-  /*outline: solid 1px gainsboro;*/
   cursor: pointer;
   transition: ease 0.3s;
+
+}
+
+.imgBox .imgChip {
+  background-color: var(--color-6);
+  color: var(--background-color);
+  float: left;
+  display: flex;
+  position: absolute;
+  left: 2px;
+  Bottom: 2px;
+  height: 25px;
+  cursor: pointer;
+  transition: ease 0.3s;
+  z-index: 20;
+}
+
+.imgBox .imgChip .MuiSvgIcon-root{
+  color: var(--background-color);
+}
+.imgBox .imgChip span {
+  font-size: small;
+  overflow: visible !important;
+  color: var(--background-color);
 }
 
 .imgBox:hover {
-  box-shadow: 3px 3px 13px 4px gainsboro;
-
+  box-shadow: 3px 3px 13px 4px var(--shadow-color);
   transform: scale(1.1);
   transition: ease 0.3s;
 }
 
 .imgBox:hover .imgChip{
-  visibility: hidden;
-  background-color: rgba(200,200,200,0) !important ;
-  color: rgba(200,200,200,0) !important;
+  background-color: transparent;
+  color: transparent;
   transition: ease 0.3s;
 }
-
+.imgBox:hover .imgChip span{
+  color: transparent;
+  transition: ease 0.3s;
+}
 .imgBox:hover .imgChip .MuiSvgIcon-root{
-  visibility: hidden;
-  background-color: rgba(200,200,200,0) !important ;
-  color: rgba(200,200,200,0) !important;
+  color: transparent;
   transition: ease 0.3s;
 }
-
-.imgBoxItem {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  line-height: 0;
-}
-
-.imgChip {
-  background-color: white !important;
-  color: #282c34;
-  float: left;
-  display: block;
-  position: absolute;
-  left: 2px;
-  Bottom: 2px;
-  height: 25px !important;
-  cursor: pointer;
-  transition: ease 0.3s;
-}
-
-.imgChip span {
-  font-size: small;
-  overflow: visible !important;
-}
-
-
-
 
 
 .musicSearchBar {
@@ -202,7 +203,7 @@ img[src=""],img:not([src]){
 }
 
 .hoverImg:hover{
-  box-shadow: 1px 2px 15px 1px rgba(176, 176, 176, 0.42);
+  box-shadow: 1px 2px 15px 1px var(--shadow-color);
   transition: ease-in-out 300ms;
 }
 
@@ -212,19 +213,55 @@ img[src=""],img:not([src]){
 
 
 .shadowImg{
-  box-shadow: 1px 2px 15px 1px rgba(176, 176, 176, 0.42);
+  box-shadow: 1px 2px 15px 1px var(--shadow-color);
   transition: ease-in-out 300ms;
+}
+.coverImgFull{
+  width: 80%;
+  height: auto;
+  min-width: 220px;
+  margin: 10%;
+  border: none;
+  border-radius: 15px;
+  overflow:hidden;
+}
+.coverImg{
+  width: 280px;
+  /*height: 220px;*/
+  min-width: 220px;
+  background:var(--shadow-color);
+  margin: 20px;
+  border: none;
+  border-radius: 15px;
+  overflow:hidden;
+}
+
+.lyric{
+  margin: 5px 0;
+  cursor: pointer;
+  text-align: left;
+  font-size: 16px;
+  color: var(--gray-2);
+  text-decoration: var(--gray-2);
+}
+
+.lyric:hover {
+  font-weight:600;
 }
 
 .activeLyric{
-  font-weight:bold;
-  background-color: var(--color-fill-2) !important;
-  transition: ease-in-out 5000ms;
-}
-.activeBgc{
-  background-color: var(--color-fill-2) !important;
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--gray-8);
+  transition: ease-in-out 500ms;
 }
 
+.activeBgc{
+  background-color: var(--color-6) !important;
+}
+.activeBgc *{
+  color: var(--background-color) !important;
+}
 
 
 /*#musicControlCenter:hover {*/
@@ -241,7 +278,7 @@ img[src=""],img:not([src]){
   top: 0;
   left: 0;
   height: 100vh;
-  background: #FFFFFF;
+  background: var(--background-color);
   display: flex;
 }
 
@@ -254,7 +291,7 @@ img[src=""],img:not([src]){
   height: 80vh;
   margin-top: 10vh;
   margin-left: 10vh;
-  background: #FFFFFF;
+  background: var(--background-color);
   transition: ease-in-out 3000ms;
 }
 
@@ -268,7 +305,7 @@ img[src=""],img:not([src]){
   left: 0;
   max-height: initial !important;
   margin: 10vh;
-  background: #FFFFFF;
+  background: var(--background-color);
   transition: ease-in-out 3000ms;
 
 }
@@ -284,7 +321,7 @@ img[src=""],img:not([src]){
   height: 80vh;
   max-height: initial !important;
   margin: 10vh;
-  background: #FFFFFF;
+  background: var(--background-color);
   transition: ease-in-out 3000ms;
 }
 
@@ -310,7 +347,7 @@ img[src=""],img:not([src]){
   width: 100vw;
   height: 100vh;
   max-height: initial !important;
-  background: #FFFFFF;
+  background: var(--background-color);
 }
 .musicBarVisible{
   z-index: 1000;
@@ -321,7 +358,7 @@ img[src=""],img:not([src]){
   width: 100vw;
   height: 100vh;
   max-height: initial !important;
-  background: #FFFFFF;
+  background: var(--background-color);
 }
 
 .toolsBarVisible {
@@ -329,7 +366,7 @@ img[src=""],img:not([src]){
 }
 
 .hover:hover {
-  box-shadow: 1px 1px 15px 1px rgba(0,0,0,0.1) !important;
+  box-shadow: 1px 1px 15px 1px var(--shadow-color) !important;
   transition: ease-in-out 200ms;
 }
 
@@ -339,4 +376,46 @@ img[src=""],img:not([src]){
 
 .hoverScale:hover {
   transform:scale(1.05);
+}
+
+.listButton{
+  border-radius: 20px !important;
+  margin: 2px !important;
+  width: auto !important;
+  flex-grow: 1 !important;
+  display: flex !important;
+  transition: ease-in-out 200ms;
+}
+
+.listButton:hover{
+  background-color: var(--color-6) !important;
+  transition: ease-in-out 200ms;
+
+}
+
+.listButton:hover *{
+  transition: ease-in-out 200ms;
+  color: var(--background-color) !important;
+}
+
+
+.menuBar{
+  border-radius: 20px !important;
+  margin: 2px !important;
+  width: auto !important;
+  flex-grow: 1 !important;
+  display: flex !important;
+  overflow: hidden;
+  background-color: var(--color-6) !important;
+}
+
+
+.fill2{
+  background-color: var(--color-6) !important;
+  transition: ease-in-out 200ms;
+}
+.fill2:hover{
+  background-color: var(--color-6) !important;
+  transition: ease-in-out 200ms;
+
 }

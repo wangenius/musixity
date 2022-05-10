@@ -1,13 +1,11 @@
-import Box from "@mui/material/Box";
 import {Fragment, useEffect, useState} from "react";
 import {toGetTopArtist} from "../../../routers/musicApi";
-import Button from "@mui/material/Button";
 import WaitLoad from "../../util/WaitLoad";
 import {Space} from "@arco-design/web-react";
 import {Select} from "@arco-design/web-react/lib";
 import {ArtistListItem} from "./ArtistListItem";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {PlayListSongItem} from "../playlist/PlaylistItem";
+import Grid from "@mui/material/Grid";
 
 
 export function ArtistsFlow(){
@@ -22,7 +20,7 @@ export function ArtistsFlow(){
         setResult([])
         setOffset(0)
 
-        toGetTopArtist(type,area,10,-1,0,res=>{
+        toGetTopArtist(type,area,40,-1,0,res=>{
             setResult(res.data.artists)
             setOffset(1)
         })
@@ -31,7 +29,7 @@ export function ArtistsFlow(){
 
 
     const getMore = () => {
-        toGetTopArtist(type,area,10,-1,offset*10,res=>{
+        toGetTopArtist(type,area,20,-1,offset*20,res=>{
             setResult(result.concat(res.data.artists))
             setOffset(offset + 1)
         })
@@ -82,6 +80,7 @@ export function ArtistsFlow(){
 
                 {
                     <InfiniteScroll
+                        style={{padding:"20px 20px 0"}}
                         id={"infiniteScroll"}
                         dataLength={
                             result.length
@@ -99,14 +98,22 @@ export function ArtistsFlow(){
                         scrollableTarget="scrollableDiv"
                     >
 
-                        {
-                            result.map((item,key) => {
-                                    return (
-                                        <ArtistListItem key={key} num={key} item={item}/>
-                                    )
-                                }
-                            )
-                        }
+                        <Grid container>
+
+                            {
+                                result.map((item,key) => {
+                                        return (
+                                            <Grid item xs={6}>
+                                                <ArtistListItem key={key} num={key} item={item}/>
+                                            </Grid>
+
+                                        )
+                                    }
+                                )
+                            }
+
+
+                        </Grid>
 
                     </InfiniteScroll>
                 }

@@ -37,20 +37,21 @@ export function LyricBox(props){
 
             const parent = document.getElementById("lyricCard")
             const child = document.getElementById("activeLyric")
-
-            props.isFull?
+            if (props.isFull){
                 parent.scrollTo(
                     {
                         top: child.offsetTop - 300,
                         behavior: 'smooth',
                     }
-                ):
+                )
+            }else {
                 parent.scrollTo(
                     {
                         top: child.offsetTop - 2,
                         behavior: 'smooth',
                     }
                 )
+            }
 
 
         }catch {
@@ -62,25 +63,23 @@ export function LyricBox(props){
 
     return(
 
-            <Card id={"lyricCard"} className={props.isFull?"lyricFull card": "card"} sx={{minHeight:"40px",maxHeight: "170px",overflowY:"auto",position:"relative"}}>
+            <Box id={"lyricCard"} className={props.isFull?"lyricFull card":""} sx={{marginLeft:2,minHeight:"40px",maxHeight: "240px",overflowY:"auto",position:"relative"}}>
                 {
                     lyr.current.map((item,key)=>{
 
                         return(
                             (item.c !== "")?
-                                <ListItemButton
+                                <Box
                                     id={(position - 1 === key)?"activeLyric": null}
-                                    className={(position - 1 === key)?"listButton activeLyric": "listButton"}
+                                    className={(position - 1 === key)?"lyric activeLyric":"lyric"}
                                     onClick={()=>{props.handleLyric(item.t)}}
                                     key={key}>
                                     {item.c}
-                                </ListItemButton>:""
+                                </Box>:""
                         )
                     })
                 }
-
-
-            </Card>
+            </Box>
 
     )
 }

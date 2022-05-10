@@ -1,9 +1,7 @@
 import Box from "@mui/material/Box";
-import {Fragment, useEffect, useState} from "react";
+import {useEffect} from "react";
 import {ListItemAvatar, ListItemButton, ListItemText, styled} from "@mui/material";
-import {toGetArtistDetail} from "../../routers/musicApi";
 import Grid from "@mui/material/Grid";
-import {Carousel, Space} from "@arco-design/web-react";
 import Avatar from "@mui/material/Avatar";
 import {Camera, Comment, Egg, Favorite, QueueMusicOutlined} from "@mui/icons-material";
 import store from "../../reducer/store";
@@ -14,10 +12,6 @@ import timeTrans from "../../util/timeTrans";
 import {changeSong} from "../../reducer/musicReducer";
 import {breakpoint, useViewport} from "../../util/viewportContext";
 
-
-const Share = styled("div")({
-    padding:"10px"
-})
 const SharePhoto = styled("div")({
     padding:"10px",
     alignContent:"center"
@@ -37,7 +31,7 @@ export default function ShareBox(props){
     },[props.item.json])
 
     return(
-        <Share className={"card hover"} sx={{textAlign:'left'}}>
+        <Box className={"card hover"} sx={{textAlign:'left',padding:"10px"}}>
 
             <Box sx={{display:"flex",paddingTop:"5px"}}>
                 <Button sx={{height:"60px",borderRadius:"20px",paddingX:"20px"}} variant={"text"}>
@@ -92,7 +86,6 @@ export default function ShareBox(props){
                             <Image.PreviewGroup infinite>
                                 <Grid container  style={(width > breakpoint.md)?{width:"100%"}:{width:"80vw"}} spacing={1}>
 
-
                                     {props.item.pics.map((item, index) =>
 
                                             <Grid key={index} item xs={(width > breakpoint.md)?3:4} style={{height:140,width:140,overflow:"hidden"}}>
@@ -136,13 +129,13 @@ export default function ShareBox(props){
             <Box>
             {
                 (content.hasOwnProperty("song"))?
-                    <ListItemButton className={"listButton fill2"} onClick={function () {
+                    <ListItemButton className={"listButton"} style={{backgroundColor:"var(--gray1-2)",color:"var(--color-6)"}} onClick={function () {
                         store.dispatch(changeSong(content.song))
                     }}>
                         <ListItemAvatar>
                             <Avatar>
                                 <img style={{width: "inherit", height: "inherit"}} src={content.song.img80x80}
-                                     alt={<QueueMusicOutlined/>}/>
+                                     alt={""}/>
                             </Avatar>
                         </ListItemAvatar>
                         <ListItemText sx={{flexGrow:1}} primary={content.song.name} secondary={content.song.artists[0].name}/>
@@ -183,6 +176,6 @@ export default function ShareBox(props){
 
 
 
-        </Share>
+        </Box>
     )
 }

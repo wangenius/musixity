@@ -26,13 +26,6 @@ function ShareFlow(props)    {
     },[props.userReducer.user])
 
 
-    // useEffect(()=>{
-    //     if (!props.userReducer.user.hasOwnProperty("nickname")){
-    //
-    //     }
-    // })
-
-
     const getMore = () => {
       toGetShares(pageSize,lastTime,res=>{
           console.log(res.data.event)
@@ -47,6 +40,7 @@ function ShareFlow(props)    {
     return(
         <Fragment>
             <InfiniteScroll
+                style={{maxWidth:"650px"}}
                 dataLength={
                     shares.length
                 }

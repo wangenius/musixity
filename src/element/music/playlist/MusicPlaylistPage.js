@@ -61,6 +61,7 @@ function MusicPlaylistPage(props){
 
 
                 <InfiniteScroll
+                    style={{padding:"20px"}}
                     className={"overVisible"}
                     dataLength={
                         song.length
