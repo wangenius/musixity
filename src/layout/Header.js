@@ -3,11 +3,21 @@ import {useEffect, useState} from 'react';
 import {useNavigate} from "react-router";
 import Box from "@mui/material/Box";
 import {connect} from "react-redux";
-import {ArrowBack, Close, Fullscreen, FullscreenExit, Home, HorizontalRule, Settings,} from "@mui/icons-material";
+import {
+    ArrowBack,
+    Brightness5,
+    Close,
+    Fullscreen,
+    FullscreenExit,
+    Home,
+    HorizontalRule,
+    Search,
+} from "@mui/icons-material";
 import store from "../reducer/store";
 import {changeSearchMsg} from "../reducer/searchReducer";
 import {Input} from "@arco-design/web-react";
-import Button from "../element/util/Button";
+import Btn from "../element/util/Button";
+import {IconUser} from "@arco-design/web-react/icon";
 
 
 function Header(props) {
@@ -16,6 +26,7 @@ function Header(props) {
     const [user,setUser] = useState({});
     const [value,setValue] = useState("")
     const [isMaxFull,setIsMaxFull] = useState(false)
+    const [theme,setTheme] = useState(true)
 
     //
     // const toSearch = () => {
@@ -26,7 +37,6 @@ function Header(props) {
     let minimize = () => {}
     let minToTray = () => {}
     let maxToFull = () => {}
-    let fullScreen = () => {}
     try{
         const {ipcRenderer}  = window.electron;
         minimize = () => {
@@ -39,9 +49,7 @@ function Header(props) {
             ipcRenderer.send('window-maxToFull')
             setIsMaxFull(!isMaxFull)
         }
-        fullScreen = () => {
-            ipcRenderer.send('window-fullScreen')
-        }
+
 
     }catch (err){
         console.log(err)
@@ -57,17 +65,19 @@ function Header(props) {
     },[props.userReducer.user])
 
 
+    useEffect(()=>{
+        document.documentElement.dataset.theme = theme?"blue":"dark"
+    })
 
 
 
     return (
-        <Box sx={{}} className={"HeaderBar canDrag"}>
-            <Button icon={<Home/>} onClick={()=>{navigate("/")}}/>
-            <Button icon={<ArrowBack/>} onClick={()=>{navigate(-1)}}/>
-            <Box className={"musicSearchBar"}>
+        <Box sx={{}} className={"HeaderBar"}>
+            <Btn iconItem={<Home/>} className={"iconBtn"} onClick={()=>{navigate("/")}}/>
+            <Btn iconItem={<ArrowBack/>} className={"iconBtn"} onClick={()=>{navigate(-1)}}/>
                 <Input
+                    prefix={<Search />}
                     className={"searchInput"}
-                    style={{flexGrow:1}}
                     allowClear
                     placeholder='搜索'
                     value={value}
@@ -79,20 +89,23 @@ function Header(props) {
                               },1000)
                             } }
                 />
-            </Box>
-            <Box style={{flex: 1}}/>
 
             {
                 isLog?
-                    <Button onClick={() => {navigate("/me")}} sx={{fontSize:"15px"}} icon={<img style={{width:"30px",height:"30px",borderRadius:"4px"}} src={user.avatarUrl} alt={""}/>} name={user.nickname}/>
+                    <Btn onClick={() => {navigate("/me")}} iconUrl={user.avatarUrl} className={"textIconBtn"} name={user.nickname}/>
                     :
-                    <Button onClick={() => navigate("/login")}  sx={{fontSize:"15px"}} name={"LOGIN"}/>
+                    <Btn iconItem={<IconUser/>} className={"textIconBtn"} onClick={() => navigate("/login")} name={"LOGIN"}/>
             }
-            <Button icon={<Settings/>} onClick={()=>{}}/>
-            <Button icon={<HorizontalRule/>} onClick={minimize}/>
+            {/*<Btn icon={<Settings/>} onClick={()=>{}}/>*/}
+            <Box sx={{width: '20px'}}/>
+            <Btn iconItem={<Brightness5 />} className={"iconBtn"} onClick={()=>{
+                document.documentElement.dataset.theme = theme?"blue":"dark"
+                setTheme(!theme)
+            }}/>
+            <Btn iconItem={<HorizontalRule/>} className={"iconBtn"} onClick={minimize}/>
             {/*<Button icon={<CheckBoxOutlineBlank />} onClick={maxToFull}/>*/}
-            <Button icon={isMaxFull?<FullscreenExit />:<Fullscreen />} onClick={maxToFull}/>
-            <Button icon={<Close/>} onClick={minToTray}/>
+            <Btn iconItem={isMaxFull?<FullscreenExit />:<Fullscreen />} className={"iconBtn"} onClick={maxToFull}/>
+            <Btn iconItem={<Close/>} className={"iconBtn"} onClick={minToTray}/>
         </Box>
     );
 }

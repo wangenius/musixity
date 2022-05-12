@@ -1,0 +1,122 @@
+@import "global";
+
+*{
+  padding: 0;
+  margin: 0;
+  border: none;
+  .fontMedium;
+  user-select: none;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  .center;
+}
+
+/*窗口根元素*/
+#root{
+  background-color: var(--background-color);
+  color: var(--color);
+  height: 100%;
+  .border;
+  overflow: hidden;
+  border-radius: @radius;
+}
+
+/*隐藏滚动条*/
+::-webkit-scrollbar {
+  width: 0;
+}
+
+
+#centerBar{
+  height: 100vh;
+  overflow: scroll;
+  text-align: center;
+  flex: 1;
+}
+
+.imgBox {
+  /*height: auto;*/
+  grid-column-end: span 1;
+  grid-row-end: span 1;
+  display: inline-block;
+  position: relative;
+  line-height: 0;
+  max-width: 200px;
+  max-height: 200px;
+  overflow: hidden;
+  margin: 0 5px 10px;
+  border-radius: 16px !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  transition: ease 0.3s;
+
+}
+
+.imgBox .imgChip {
+  background-color: var(--color-6);
+  color: var(--background-color);
+  float: left;
+  display: flex;
+  position: absolute;
+  left: 2px;
+  Bottom: 2px;
+  height: 25px;
+  cursor: pointer;
+  transition: ease 0.3s;
+  z-index: @lay2;
+}
+
+.imgBox .imgChip .MuiSvgIcon-root{
+  color: var(--background-color);
+}
+.imgBox .imgChip span {
+  font-size: small;
+  overflow: visible !important;
+  color: var(--background-color);
+}
+
+.imgBox:hover {
+  box-shadow: 3px 3px 13px 4px var(--shadow-color);
+  transform: scale(1.1);
+  transition: ease 0.3s;
+}
+
+.imgBox:hover .imgChip{
+  background-color: transparent;
+  color: transparent;
+  transition: ease 0.3s;
+}
+.imgBox:hover .imgChip span{
+  color: transparent;
+  transition: ease 0.3s;
+}
+.imgBox:hover .imgChip .MuiSvgIcon-root{
+  color: transparent;
+  transition: ease 0.3s;
+}
+
+
+
+.hoverImg:hover{
+  box-shadow: 1px 2px 15px 1px var(--shadow-color);
+  transition: ease-in-out 300ms;
+}
+
+
+
+
+.hover:hover {
+  box-shadow: 1px 1px 15px 1px var(--shadow-color) !important;
+  transition: ease-in-out 200ms;
+}
+
+.hover{
+  transition: ease-in-out 200ms;
+}
+
+.hoverScale:hover {
+  transform:scale(1.05);
+}

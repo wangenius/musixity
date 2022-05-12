@@ -1,6 +1,5 @@
-import Typography from "@mui/material/Typography";
 import {Fragment, useEffect} from "react";
-import {IconButton} from "@mui/material";
+
 
 export default function Btn(props){
     useEffect(()=>{
@@ -10,21 +9,18 @@ export default function Btn(props){
     return(
             <Fragment>
                 {
-
-                    props.hasOwnProperty("name")?
-
-                        <button className={"btn"} onClick={props.onClick} style={{display:'flex',width:"fit-content",borderRadius:8,padding:"0 2px",}}>
-                            {props.icon}
-                            <Typography style={{padding:"0 5px"}}>
+                        <button className={props.className} disabled={props.disabled || false} onClick={props.onClick}>
+                            {
+                                props.hasOwnProperty('iconItem')?
+                                props.iconItem:
+                                    props.hasOwnProperty("iconUrl")?
+                                <img src={props.iconUrl} alt={""}/>:""
+                            }
+                            <p>
                                 {props.name}
-                            </Typography>
-                        </button>:
-                        <button  className={"btn"} onClick={props.onClick}>
-                                {props.icon}
+                            </p>
                         </button>
-
                 }
-
-            </Fragment >
+            </Fragment>
     )
 }

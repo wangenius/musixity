@@ -1,0 +1,58 @@
+@import "global";
+
+.logPanel{
+  .flex;
+  flex-direction: column;
+  margin-top: 200px;
+  .center;
+
+  *{
+    margin: 0;
+    padding: 0;
+  }
+
+  .logInputPanel{
+    width: 380px;
+    .flex;
+    flex-direction: column;
+
+    .flex{
+      display: flex;
+      height: 80px;
+      margin: 10px 5px;
+
+
+      .input{
+        flex: 3;
+        height: 50px;
+        margin: 0 0 2px 0;
+        .arco-input-group{
+          .arco-input-inner-wrapper{
+            padding-left: 20px;
+            border-radius:25px;
+          }
+        }
+      }
+
+      .textBtnActive{
+        flex: 1;
+        margin: 2px 0 0 10px;
+        height: 50px;
+        border-radius: 25px;
+        width: 180px;
+      }
+
+      .logInBtn{
+        .textBtnActive;
+        margin: 0;
+      }
+
+
+      .textBtn{
+        padding: 0 10px;
+      }
+
+
+    }
+  }
+}

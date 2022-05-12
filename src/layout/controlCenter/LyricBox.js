@@ -1,9 +1,8 @@
-import {Card, ListItemButton} from "@mui/material";
-import {useEffect, useRef, useState} from "react";
-import {toGetLyrics} from "../../../routers/musicApi";
+import {Fragment, useEffect, useRef, useState} from "react";
+import {toGetLyrics} from "../../routers/musicApi";
 import Box from "@mui/material/Box";
 
-export function LyricBox(props){
+export default function Lyric(props){
 
     const [position,setPosition] = useState(0)
     const lyr = useRef([])
@@ -35,22 +34,24 @@ export function LyricBox(props){
     useEffect(()=>{
         try {
 
-            const parent = document.getElementById("lyricCard")
+            const parent = document.getElementById("lyric")
             const child = document.getElementById("activeLyric")
             if (props.isFull){
                 parent.scrollTo(
                     {
-                        top: child.offsetTop - 300,
+                        top: child.offsetTop - 200,
                         behavior: 'smooth',
                     }
                 )
             }else {
-                parent.scrollTo(
-                    {
-                        top: child.offsetTop - 2,
-                        behavior: 'smooth',
-                    }
-                )
+                setTimeout(()=>{
+                    parent.scrollTo(
+                        {
+                            top: child.offsetTop - 2,
+                            behavior: 'smooth',
+                        }
+                    )
+                },200)
             }
 
 
@@ -60,10 +61,9 @@ export function LyricBox(props){
     },[position])
 
 
-
     return(
 
-            <Box id={"lyricCard"} className={props.isFull?"lyricFull card":""} sx={{marginLeft:2,minHeight:"40px",maxHeight: "240px",overflowY:"auto",position:"relative"}}>
+            <Fragment>
                 {
                     lyr.current.map((item,key)=>{
 
@@ -79,7 +79,7 @@ export function LyricBox(props){
                         )
                     })
                 }
-            </Box>
+            </Fragment>
 
     )
 }

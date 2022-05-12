@@ -107,7 +107,7 @@ function MusicPlayListFlow(props){
                                         </p>
                                     }
                                     next={getMore}
-                                    scrollableTarget="scrollableDiv"
+                                    scrollableTarget="centerBar"
                                 >
                                     <Grid container spacing={2}>
                                         {

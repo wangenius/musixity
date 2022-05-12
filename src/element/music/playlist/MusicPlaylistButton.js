@@ -28,10 +28,7 @@ function MusicPlaylistButton(props)  {
                             }}>
                                 <Chip  className={"imgChip"} size={"small"} icon={<PlayCircleFilledWhite/>} label={numberToWan((props.type === 1 || props.type === 2 || props.type === 3)?props.data.playCount:props.data.playcount)} />
 
-
-
                                 <Image
-                                    style={{zIndex:0}}
                                     height={"150px"}
                                     width={"150px"}
                                      src={(props.type === 1 || props.type === 2) ? props.data.coverImgUrl : (props.type === 3 || props.type === 4) ? props.data.picUrl : ""}

@@ -54,7 +54,7 @@ function ShareFlow(props)    {
                     </p>
                 }
                 next={getMore}
-                scrollableTarget="scrollableDiv"
+                scrollableTarget="centerBar"
             >
 
                     {

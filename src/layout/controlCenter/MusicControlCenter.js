@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import {useEffect, useState} from "react";
-import {toDislikeSong, toGetSong, toGetSongDetails, toLikeSong} from "../../../routers/musicApi";
-import { connect } from 'react-redux';
+import {toDislikeSong, toGetSong, toGetSongDetails, toLikeSong} from "../../routers/musicApi";
+import {connect} from 'react-redux';
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {
@@ -9,35 +9,31 @@ import {
     Comment,
     Favorite,
     FavoriteBorder,
-    Lyrics, OpenInFull,
+    Menu,
+    OpenInFull,
     Pause,
     PlayArrow,
-    Repeat, RepeatOne,
+    Repeat,
+    RepeatOne,
     SkipNext,
     SkipPrevious
 } from "@mui/icons-material";
-import {Card, IconButton, Slider, styled} from "@mui/material";
-import store from "../../../reducer/store";
-import {handleLikeSongInStore} from "../../../reducer/likeListReducer";
-import {deleteArray, formatDuration} from "../../../util/mathUtil";
-import {LyricBox} from "./LyricBox";
-import {theme} from "../../../asset/theme";
-import {CommentBox} from "./CommentBox";
-import {changeArtistState} from "../../../reducer/artistReducer";
+import {IconButton, Slider, styled} from "@mui/material";
+import store from "../../reducer/store";
+import {handleLikeSongInStore} from "../../reducer/likeListReducer";
+import {deleteArray, formatDuration} from "../../util/mathUtil";
+import Lyric from "./LyricBox";
+import {changeArtistState} from "../../reducer/artistReducer";
 import {useNavigate} from "react-router";
-import {changeSong} from "../../../reducer/musicReducer";
-import {changeRepeatPlay} from "../../../reducer/repeatPlayReducer";
-import {Tabs} from "@arco-design/web-react";
-
+import {changeSong} from "../../reducer/musicReducer";
+import {changeRepeatPlay} from "../../reducer/repeatPlayReducer";
+import {TinyText} from "../../element/util/item";
 
 function MusicControlCenter(props){
     const navigate =useNavigate()
-
     const [url,setUrl] = useState("")
     const [song,setSong] = useState({})
-
     const [isFull,setIsFull] = useState(false)
-
     const [playlist,setPlaylist] = useState(props.playlistReducer.playlist.map(item=>item.id))
 
     //是否加载
@@ -55,7 +51,6 @@ function MusicControlCenter(props){
     const [duration, setDuration] = useState(200);
 
     const audio = document.getElementById("musicAudio")
-    const TabPane = Tabs.TabPane;
 
     //播放列表初始化
     useEffect(()=>{
@@ -85,9 +80,8 @@ function MusicControlCenter(props){
 
     //设置audio 初始化
     useEffect(()=>{
-
         if (isAudioLoad){
-
+            document.getElementsByClassName("rightBar")[0].classList.remove("w0");
             audio.src = url
             audio.addEventListener("canplay", function(){
                 setDuration(audio.duration)
@@ -113,7 +107,6 @@ function MusicControlCenter(props){
                 audio.loop = true
             }else if (!isRepeatOne){
                 audio.loop = false
-
             }
         }
     },[isRepeatOne,isAudioLoad])
@@ -126,8 +119,6 @@ function MusicControlCenter(props){
             setIsLike(false)
         }
     },[props.likeListReducer.likeList, song.id])
-
-
 
 
 
@@ -175,55 +166,65 @@ function MusicControlCenter(props){
     const handleLyric = (time) => {
         audio.currentTime =time
     }
+    const setFullScreen = () => {
+        isFull?
+            document.getElementsByClassName("musicControl")[0].classList.remove("fullScreen"):
+            document.getElementsByClassName("musicControl")[0].classList.add("fullScreen");
+        setIsFull(!isFull)
+    }
 
 
         return (
-            <Box className={isFull?"musicControlCenterFull musicControl":"musicControl"}>
-                <audio id={"musicAudio"} autoPlay src={url}/>
+            <Box className={"musicControl"}>
+                <audio id={"musicAudio"}
+                       autoPlay
+                       src={url}/>
 
-                <img className={isFull?"coverImg coverImgFull shadowImg":"coverImg shadowImg"}
-                     src={(song.hasOwnProperty("al"))? song.al.picUrl:""}
-                     alt={""}/>
+                <Box id={"musicInfo"}>
+                    <Box className={"musicCover"}>
+                        <img className={"coverImg"}
+                             src={(song.hasOwnProperty("al"))? song.al.picUrl:""}
+                             alt={""}
+                             onClick={setFullScreen}
+                        />
 
-
-                <Box sx={isFull?{margin:"10px 0 10px 10%"}:{textAlign:"left",margin:"10px 0 15px 20px"}}>
-                    <Typography variant="h5" component="h2">
-                        {song.hasOwnProperty("name") ?
-                            song.name
-                            :
-                            "No Song"
-                        }
-                    </Typography>
+                        <Box className={"h5"}>
+                            {song.hasOwnProperty("name") ?
+                                song.name
+                                :
+                                "No Song"
+                            }
+                        </Box>
 
                         {song.hasOwnProperty("ar") ?
                             song.ar.map((item,key) => {
-                            return(
-                                <Button key={key} variant={"text"} onClick={()=>{
-                                    store.dispatch(changeArtistState(item));
-                                    navigate("/music/artist")
-                                }}>
-                                    {item.name}
-                                </Button>
+                                return(
+                                    <Button className={"artistBtn"} key={key} variant={"text"} onClick={()=>{
+                                        store.dispatch(changeArtistState(item));
+                                        navigate("/music/artist")
+                                    }}>
+                                        {item.name}
+                                    </Button>
                                 )
 
                             }):
-                            "No Artist"
+                            <Box>No Artist</Box>
                         }
+                    </Box>
 
+                <Box id={"lyric"}>
+                    <Lyric isFull={isFull} id={props.musicReducer.song.id} position={position} handleLyric={handleLyric}/>
                 </Box>
 
-                {/*歌词*/}
-                {/*<Tabs type={"text"} tabPosition={"bottom"} size={"small"}>*/}
-                {/*    <TabPane key='1' title='歌词' >*/}
-                        <LyricBox isFull={isFull} id={props.musicReducer.song.id} position={position} handleLyric={handleLyric}/>
-                    {/*</TabPane>*/}
-                    {/*<TabPane key='2' title='评论'>*/}
-                        {/*<CommentBox isFull={isFull} id={props.musicReducer.song.id}/>*/}
-                {/*    </TabPane>*/}
-                {/*</Tabs>*/}
+
+
+
+
+                {/*<CommentBox isFull={isFull} id={props.musicReducer.song.id}/>*/}
+                </Box>
 
                 {/*控制*/}
-                <Box sx={{position:'absolute',bottom:"80px",width:"320px"}}>
+                <Box className={"controlSlider"}>
                     <Slider
                         aria-label="time-indicator"
                         size="small"
@@ -254,6 +255,7 @@ function MusicControlCenter(props){
                             },
                             '& .MuiSlider-rail': {
                                 opacity: 0.28,
+                                color:`var(--svg)`
                             },
                         }}
                     />
@@ -268,52 +270,49 @@ function MusicControlCenter(props){
                         <TinyText>{formatDuration(position)}</TinyText>
                         <TinyText>{formatDuration(duration)}</TinyText>
                     </Box>
-
-                    <Box sx={{width:"100%",textAlign: 'center'}}>
-                        <IconButton size={"small"} sx={{marginX:"2px"}} onClick={()=>{
-                            setIsRepeatOne(!isRepeatOne)
-                            store.dispatch(changeRepeatPlay(!isRepeatOne))
-                        }}>
-                            {(isRepeatOne)?<RepeatOne sx={{height:15,width:15}}/>:<Repeat sx={{height:15,width:15}}/>}
-                        </IconButton>
-                        <IconButton aria-label="previous"  onClick={changeLastSong}>
-                            {theme.direction === 'rtl' ? <SkipNext /> : <SkipPrevious />}
-                        </IconButton>
-                        <IconButton aria-label="play/pause" onClick={()=>{ setIsPlaying(!isPlaying) ;if (isPlaying){audio.pause()}else { audio.play() }}}>
-                            {isPlaying?<Pause  sx={{ height: 38, width: 38 }}/>:<PlayArrow sx={{ height: 38, width: 38 }} />}
-                        </IconButton>
-                        <IconButton id={"nextButton"} aria-label="next" onClick={changeNextSong}>
-                            {theme.direction === 'rtl' ? <SkipPrevious /> : <SkipNext />}
-                        </IconButton>
-                        <IconButton size={"small"} className={props.musicBarVisible?"disPlayNone":""} sx={{marginX:"2px"}} onClick={()=>{
-                        setIsFull(!isFull)
-                        }
-                        }>
-                            {isFull?<CloseFullscreen sx={{height:15,width:15}}/>:<OpenInFull sx={{height:15,width:15}} />}
-                        </IconButton>
-                    </Box>
                 </Box>
 
+                <Box className={'controlBtns'}>
+                    <IconButton size={"small"} onClick={()=>{
+                        setIsRepeatOne(!isRepeatOne)
+                        store.dispatch(changeRepeatPlay(!isRepeatOne))
+                    }}>
+                        {(isRepeatOne)?<RepeatOne sx={{height:15,width:15}}/>:<Repeat sx={{height:15,width:15}}/>}
+                    </IconButton>
+                    <IconButton aria-label="previous"  onClick={changeLastSong}>
+                        <SkipPrevious />
+                    </IconButton>
+                    <IconButton aria-label="play/pause" onClick={()=>{ setIsPlaying(!isPlaying) ;if (isPlaying){audio.pause()}else { audio.play() }}}>
+                        {isPlaying?<Pause  sx={{ height: 30, width: 30 }}/>:<PlayArrow sx={{ height: 30, width: 30 }} />}
+                    </IconButton>
+                    <IconButton id={"nextButton"} aria-label="next" onClick={changeNextSong}>
+                        <SkipNext />
+                    </IconButton>
+                    <IconButton size={"small"} onClick={setFullScreen}>
+                        {isFull?<CloseFullscreen sx={{height:15,width:15}}/>:<OpenInFull sx={{height:15,width:15}} />}
+                    </IconButton>
+                </Box>
+
+
                 {/*喜欢*/}
-                <Box sx={{position:"absolute",bottom:"20px",right:"20px"}}>
+                <Box className={"interactBtns"}>
                     {(props.userReducer.user !== null)?
                     <Button startIcon={isLike ? <Favorite />:<FavoriteBorder />} onClick={isLike?handleDislikeSong: handleLikeSong}>
                         {isLike ? "已喜欢":"喜欢"}
                     </Button>:""}
+
+                    <Button startIcon={<Comment/>} onClick={()=>{}}>
+                        {"评论"}
+                    </Button>
+                    <Button startIcon={<Menu/>} onClick={()=>{}}>
+                        {"列表"}
+                    </Button>
                 </Box>
 
             </Box>
 
         )
 }
-
-
-const TinyText = styled(Typography)({
-    fontSize: '0.75rem',
-    opacity: 0.38,
-    fontWeight: 500,
-    letterSpacing: 0.2,
-});
 
 //从reducer中获取初始值，props.xxx就可以直接拿
 const mapStateToProps = (state) => ({userReducer: state.userReducer,

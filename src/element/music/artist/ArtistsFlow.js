@@ -95,7 +95,7 @@ export function ArtistsFlow(){
                             </p>
                         }
                         next={getMore}
-                        scrollableTarget="scrollableDiv"
+                        scrollableTarget="centerBar"
                     >
 
                         <Grid container>

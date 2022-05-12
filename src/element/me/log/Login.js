@@ -6,9 +6,8 @@ import Box from "@mui/material/Box";
 export default function Login() {
 
     return (
-        <Box>
+        <Box className={"logPanel"}>
             <Outlet/>
         </Box>
-
     );
 }

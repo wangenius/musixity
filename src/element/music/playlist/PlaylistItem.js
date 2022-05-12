@@ -59,15 +59,6 @@ export function PlayListSongItem(props){
                 console.log(props.item)
                 handleClickOnSong(props.item)
             }}>
-
-
-
-                <ListItemAvatar>
-                    <Avatar>
-                        <img style={{width: "inherit", height: "inherit"}} src={props.item.al.picUrl}
-                             alt={<QueueMusicOutlined />}/>
-                    </Avatar>
-                </ListItemAvatar>
                 <ListItemText primary={props.item.name} secondary={props.item.ar[0].name}/>
             </ListItemButton>
 

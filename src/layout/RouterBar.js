@@ -1,18 +1,34 @@
-import {useState} from "react";
+import {Fragment, useState} from "react";
+import {Divider, List} from "@mui/material";
 import {
-    Divider, List,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText
-} from "@mui/material";
-import {Album, Contacts, Forum, History, People, Person} from "@mui/icons-material";
+    Album,
+    AlbumTwoTone,
+    CircleRounded,
+    Contacts,
+    EventAvailableRounded,
+    FireExtinguisher,
+    Fireplace,
+    Forum,
+    History,
+    HotTub,
+    ListAltTwoTone,
+    People,
+    Person,
+    ReceiptTwoTone,
+    Recommend,
+    RefreshTwoTone,
+    RouterRounded,
+    SelectAllTwoTone,
+    Subscript,
+    Subscriptions,
+    SubscriptionsTwoTone
+} from "@mui/icons-material";
 import {useNavigate} from "react-router";
-import {connect} from "react-redux";
+import {connect, Subscription} from "react-redux";
 import {changePlaylistType} from "../reducer/playlistTypeReducer";
 import store from "../reducer/store";
 import {IconRight} from "@arco-design/web-react/icon";
-import Box from "@mui/material/Box";
-
+import Btn from "../element/util/Button";
 
 
 function RouterBar(props) {
@@ -72,71 +88,55 @@ function RouterBar(props) {
         }
     ]
 
-
     const albumButtons = [
         {
             name:"热门歌单",
-            icon:<IconRight />,
+            icon:<ListAltTwoTone />,
             type:1
         },        {
             name:"精品歌单",
-            icon:<IconRight />,
+            icon:<AlbumTwoTone />,
             type:2
         },        {
             name:"推荐歌单",
-            icon:<IconRight />,
+            icon:<Recommend />,
             type:3
         },        {
             name:"每日精选",
-            icon:<IconRight />,
+            icon:<Subscriptions />,
             type:4
         }
     ]
 
 
         return (
-            <Box className={"routerBar"} style={{minWidth:"200px",maxWidth:"200px"}}>
-                <Box>
-                        <List sx={{padding:"10px"}}>
-                            {
-                                buttons.map((item,key)=>{
-                                    return(
-                                        <ListItemButton key={key} className={(openSub === item.sub)?"listButton activeBgc":"listButton"} onClick={item.handle}>
-                                            <ListItemIcon>
-                                                {item.icon}
-                                            </ListItemIcon>
-                                            <ListItemText primary={item.name} style={{fontFamily:"h_Medium"}}/>
-                                        </ListItemButton>
-                                    )
-                                })
-                            }
-                        </List>
-                </Box>
+            <Fragment>
+
+                <List className={"btnList"}>
+                    {
+                        buttons.map((item,key)=>{
+                            return(
+                                <Btn key={key} iconItem={item.icon} className={(openSub === item.sub)?"listButton activeBtn":"listButton"} name={item.name} onClick={item.handle}/>
+                            )
+                        })
+                    }
+                </List>
+
                 <Divider variant={"fullWidth"}/>
-                <Box style={(openSub === 1)?{display:"block",width: '100%'}:{display:"none"}}>
-                        <List sx={{padding:"10px"}}>
-                            {
-                                albumButtons.map((item,key)=>{
-                                    return(
-                                        <ListItemButton sx={{textAlign:"center"}} key={key} className={(types === item.type)?"listButton activeBgc":"listButton"} onClick={()=>{
-                                            handleClickAlbum(item.type)
-                                        }}>
-                                            <ListItemText primary={item.name} style={{fontFamily:"h_Medium"}} />
-                                            {
-                                                (types === item.type)?
-                                                    <ListItemIcon sx={{minWidth:0}}>
-                                                    {item.icon}
-                                                </ListItemIcon>:""
-                                            }
 
-                                        </ListItemButton>
-                                    )
-                                })
-                            }
-                        </List>
-                </Box>
-
-            </Box>
+                <List class={(openSub === 1)?"btnList":"none"}>
+                    {
+                        albumButtons.map((item,key)=>{
+                            return(
+                                <Btn key={key} iconItem={item.icon}
+                                     className={(types === item.type)?"listButton activeBtn":"listButton"} name={item.name} onClick={()=>{
+                                    handleClickAlbum(item.type)
+                                }}/>
+                            )
+                        })
+                    }
+                </List>
+            </Fragment>
         )
 }
 

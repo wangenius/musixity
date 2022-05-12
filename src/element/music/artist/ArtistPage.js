@@ -40,7 +40,7 @@ function ArtistPage(props){
     }
 
     const handleMoreSong = () => {
-        toGetArtistSongs(artist.id,"hot",10,offset*10,res=>{
+        toGetArtistSongs(artist.id,"hot",20,offset*20,res=>{
             setOffset(offset + 1)
             setSongs(songs.concat(res.songs))
         })
@@ -88,7 +88,7 @@ function ArtistPage(props){
                                         </p>
                                     }
                                     next={handleMoreSong}
-
+                                    scrollableTarget={"centerBar"}
                                 >
 
                                     {

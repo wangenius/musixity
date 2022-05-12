@@ -1,9 +1,7 @@
 import * as React from 'react';
-import {BrowserRouter, HashRouter, Navigate, Route, Routes} from "react-router-dom";
+import {HashRouter, Navigate, Route, Routes} from "react-router-dom";
 import MainPage from "./MainPage";
-import {ThemeProvider} from "@mui/material";
 import MusicPanel from "../element/music/playlist/MusicPlayListFlow"
-import {theme} from "../asset/theme";
 import NoContentPage from "./NoContentPage";
 import Login from "../element/me/log/Login";
 import SignIn from "../element/me/log/SignIn";
@@ -20,10 +18,6 @@ import FriendsFlow from "../element/friend/FriendsFlow";
 import FriendsEntrance from "../element/friend/FriendsEntrance";
 import UsersPage from "../element/friend/UsersPage";
 import HistoryEntrance from "../element/history/HistoryEntrance";
-import {useEffect} from "react";
-
-
-
 
 
 export default function router(props) {

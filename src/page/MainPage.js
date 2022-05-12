@@ -4,7 +4,7 @@ import {Outlet} from "react-router-dom";
 import Header from "../layout/Header";
 import Box from "@mui/material/Box";
 import RouterBar from "../layout/RouterBar";
-import MusicPlayBlock from "../element/music/controlCenter/MusicControlCenter";
+import MusicPlayBlock from "../layout/controlCenter/MusicControlCenter";
 import {connect} from "react-redux";
 import {toCheckLogStatus, toGetLikeList} from "../routers/musicApi";
 import store from "../reducer/store";
@@ -80,20 +80,22 @@ function MainPage(props) {
                 <Divider variant={"fullWidth"}/>
 
                 <Box style={{marginLeft:0,width:"100vw",justifyContent:"center",overflow:"visible",display:"flex"}}>
-                    <RouterBar handleToolBar={handleToolBar} toolsBarVisible={toolsBarVisible} isHideToolsBar={isHideToolsBar}/>
-
-                    <Box id="scrollableDiv" className={"infiniteFlow"} style={{flexGrow:1,position:"relative",textAlign:"center"}}>
+                    <Box className={"leftBar"}>
+                        <RouterBar handleToolBar={handleToolBar} toolsBarVisible={toolsBarVisible} isHideToolsBar={isHideToolsBar}/>
+                    </Box>
+                    <Box id={"centerBar"}>
                         <BackTop
                             easing={'linear'}
                             duration={600}
-                            style={{ position: 'fixed', right: 400, bottom: 60 }}
+                            style={{zIndex:"4",position: 'fixed', right: 400, bottom: 60 }}
                             visibleHeight={30}
-                            target={() => document.getElementById('scrollableDiv')}
+                            target={() => document.getElementById('centerBar')}
                         />
                         <Outlet />
                     </Box>
-
-                    <MusicPlayBlock musicBarVisible={musicBarVisible} isHidePlayController={isHidePlayController}/>
+                    <Box className={"rightBar w0"}>
+                        <MusicPlayBlock musicBarVisible={musicBarVisible} isHidePlayController={isHidePlayController}/>
+                    </Box>
                 </Box>
             </Fragment>
     );

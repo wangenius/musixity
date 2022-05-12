@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import {Fragment, useEffect, useState} from "react";
-import {toGetSongHotComments} from "../../../routers/musicApi";
+import {toGetSongHotComments} from "../../routers/musicApi";
 import {Avatar, Card, ListItem, ListItemAvatar, ListItemButton, ListItemText} from "@mui/material";
 import Typography from "@mui/material/Typography";
 

@@ -81,7 +81,7 @@ function MeLikeSongsFlow(props){
                         </p>
                     }
                     next={getMore}
-                    scrollableTarget="scrollableDiv"
+                    scrollableTarget="centerBar"
                 >
 
                         {
