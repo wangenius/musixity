@@ -1,0 +1,54 @@
+@import "variant";
+
+.leftBar{
+  height: 100vh;
+  width: 210px;
+  z-index: $lay8;
+  border-right: 1px solid var(--shadow-color);
+
+  .btnList{
+    margin: 10px;
+
+    .listButton{
+      height: 48px;
+      width: 90%;
+      display: flex;
+      @extend .center;
+      padding: 0 20px;
+      border-radius: $radius;
+      margin: 5px 5%;
+      cursor: pointer;
+
+      svg{
+        width: 24px;
+        height: 24px;
+        color: var(--svg);
+      }
+      p{
+        flex: 1;
+        @extend .center;
+        font-size: 16px;
+      }
+
+
+      &:hover{
+        background-color: var(--color-6);
+        *{
+          color: var(--background-color);
+        }
+      }
+
+
+    }
+
+  }
+}
+
+.activeBtn{
+     background-color: var(--color-6) !important;
+   }
+.activeBtn *{
+  color: var(--a-svg);
+}
+
+

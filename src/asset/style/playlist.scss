@@ -1,0 +1,25 @@
+@import "variant";
+
+.playlistPage{
+  padding: 20px;
+  .playlistCover{
+    display: flex;
+    position:relative;
+    @extend .border;
+    text-align: left;
+    .hoverImg{
+      width: 220px;
+      height: 220px;
+      max-width: 220px;
+      max-height: 220px;
+      margin:20px;
+      border-radius: $radius;
+    }
+
+
+  }
+
+
+}
+
+

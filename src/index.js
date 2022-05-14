@@ -2,7 +2,9 @@
 import ReactDOM from 'react-dom/client';
 //主入口 router
 import App from './page/router';
-
+//导入 scss
+import "./asset/style/main.scss"
+// google测试
 import reportWebVitals from './util/reportWebVitals';
 //通知
 import { SnackbarProvider } from 'notistack';
@@ -14,6 +16,7 @@ import store, {persistor} from "./reducer/store";
 import {PersistGate} from "redux-persist/integration/react";
 //arco css
 import "@arco-design/web-react/dist/css/arco.css";
+//导入视图
 import {ViewportProvider} from "./util/viewportContext";
 
 export const root = ReactDOM.createRoot(document.getElementById('root'));

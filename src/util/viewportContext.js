@@ -1,8 +1,7 @@
 import React from "react";
 
-
 const viewportContext = React.createContext({});
-
+//窗口监听
 export const ViewportProvider = ({ children }) => {
     // 顺带监听下高度，备用
     const [width, setWidth] = React.useState(window.innerWidth);

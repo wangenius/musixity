@@ -32,19 +32,20 @@
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
+    "sass": "^1.51.0",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "package": "electron-packager . GeniusMusic --platform=win32 --arch=x64 --icon=./build/favicon.ico --out=./out --app-version=0.0.1 --overwrite --ignore=node_modules",
-    "dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\"",
-    "packall": "concurrently \"wait-on react-scripts build\"  \"cross-env npm run package\"  ",
-    "electron-start": "electron .",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron-dev": "electron . dev"
+    "package": "electron-packager . GeniusMusic --platform=win32 --arch=x64 --icon=./build/favicon.ico --out=./out --app-version=0.0.1 --overwrite --ignore=node_modules",
+    "electron-start": "electron .",
+    "dev": "electron . dev",
+    "e-start": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\"",
+    "e-build": "concurrently \"wait-on react-scripts build\"  \"cross-env npm run package\"  "
   },
   "eslintConfig": {
     "extends": [
@@ -68,6 +69,7 @@
     "concurrently": "^7.1.0",
     "electron-is-dev": "^2.0.0",
     "electron-packager": "^15.5.1",
+    "sass-resources-loader": "^2.2.5",
     "wait-on": "^6.0.1"
   }
 }

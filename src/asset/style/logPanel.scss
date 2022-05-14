@@ -1,0 +1,73 @@
+@import "variant";
+
+.logPanel{
+  @extend .flex;
+  flex-direction: column;
+  margin-top: 180px;
+  @extend .center;
+
+  .none{
+    display: none;
+  }
+
+  *{
+    margin: 0;
+    padding: 0;
+  }
+
+  .logInputPanel{
+    width: 380px;
+    @extend .flex;
+    flex-direction: column;
+    @extend .border;
+    margin-top: 20px;
+    padding: 30px 20px;
+    .flex{
+      display: flex;
+      height: 60px;
+      margin: 10px 5px;
+
+
+      .input{
+        flex: 3;
+        height: 50px;
+        margin: 0 0 2px 0;
+        .arco-input-group{
+          .arco-input-inner-wrapper{
+            padding-left: 20px;
+            border-radius:25px;
+          }
+        }
+      }
+      .textBtn{
+        margin-top: 50px;
+        padding: 0 15px;
+      }
+
+      .textBtnActive{
+
+        flex: 1;
+        margin: 2px 0 0 10px;
+        height: 50px;
+        border-radius: 25px;
+        width: 180px;
+
+        p{
+          display: block;
+          width: 100%;
+          @extend .center;
+        }
+      }
+
+      .logInBtn{
+        @extend .textBtnActive;
+        margin: auto;
+      }
+
+
+
+
+
+    }
+  }
+}

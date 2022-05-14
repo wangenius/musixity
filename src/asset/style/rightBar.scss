@@ -1,0 +1,202 @@
+/*controlBar.less*/
+@import "variant";
+.rightBar{
+  height: 100vh;
+  width: 350px;
+  z-index: $lay8;
+}
+
+.miniBar {
+  width: 30px;
+  .musicControl{
+    width: 30px;
+    border-left:none;
+  }
+
+  .SubMusicControl{
+    margin-left: 40px;
+  }
+}
+
+.musicControl{
+  float: right;
+  width: 350px;
+  height: 100vh;
+  background-color: var(--background-color);
+  border-left: 1px solid var(--shadow-color);
+  text-align: left;
+  @extend .transition300;
+  display: flex;
+
+  .collapseBox{
+    cursor: pointer;
+    position: relative;
+    height: 100%;
+    width: 30px;
+    //float: left;
+    &:hover{
+      .collapseBtn {
+        height: 30%;
+        top: 35%;
+
+        background-color: var(--gray1-7);
+      }
+    }
+
+    .collapseBtn{
+      width: 5px;
+      height: 20%;
+      position: absolute;
+      border-radius: 5px;
+      margin: 10px;
+      top: 40%;
+      @extend .transition300;
+      background-color: var(--gray1-3);
+    }
+
+  }
+
+    .SubMusicControl{
+      min-width: 320px;
+      height: 100%;
+    }
+
+  #musicInfo{
+    height: 680px;
+    display: flex;
+    flex-wrap: wrap
+  }
+
+
+
+  Button{
+    color: var(--gray-5);
+
+    svg {
+      color: var(--gray-5);
+    }
+  }
+
+  .musicCover{
+    @extend .transition300;
+    flex: 1;
+  }
+  #lyric{
+    flex: 5;
+  }
+  .coverImg{
+    margin: 20px;
+    width: 280px;
+    border: none;
+    border-radius: $radius;
+    overflow:hidden;
+    background-color: var(--background-color);
+    @extend .shadow
+  }
+  .h5{
+    margin: 0 0 0 20px;
+    word-wrap: initial;
+  }
+  .artistBtn{
+    margin: 10px 0 20px 20px;
+  }
+  #lyric {
+    margin:20px;
+    height: 240px;
+    overflow-y:scroll;
+    position: relative;
+    //transition: none;
+    @extend .transition100
+  }
+  .controlSlider{
+    margin: 20px 25px;
+  }
+  .controlBtns{
+    text-align: center;
+  }
+  .interactBtns{
+    text-align: center;
+  }
+  .lyric{
+    margin: 5px 0;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+    color: var(--color);
+  }
+
+  .lyric:hover {
+    font-weight:600;
+  }
+
+  .activeLyric{
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--color);
+    @extend .transition300
+  }
+
+
+
+}
+
+
+/*全屏后*/
+.fullScreen{
+  width: 100vw;
+  //background-image: var(--fullBackground);
+
+  .collapseBox{
+    width: 0;
+    overflow: hidden;
+  }
+  .SubMusicControl{
+    width: 100vw;
+    height: 100vh;
+    #musicInfo{
+      display: flex;
+      flex-wrap: nowrap;
+    }
+    .musicCover{
+      margin: 60px;
+    }
+    //
+    #lyric{
+      height: 60vh;
+      margin: 60px;
+    }
+    .lyric{
+      font-size: 21px;
+    }
+    .activeLyric{
+      font-size: 25px;
+      margin: 12px 0;
+    }
+
+  }
+
+  Button{
+    color: var(--color);
+  }
+
+
+}
+
+//宽度为0时
+.w0{
+  width: 0;
+  .musicControl{
+    width: 0;
+  }
+
+}
+
+.commentFull {
+  flex-grow: 1;
+  /*width: auto;*/
+  height: 80vh;
+  max-height: initial !important;
+  margin: 10vh;
+  background: var(--background-color);
+  transition: ease-in-out 3000ms;
+}

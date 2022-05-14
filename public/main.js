@@ -20,7 +20,7 @@ const trayMenuTemplate = [
  }
 ];
 // 设置系统托盘图标
-const iconPath = path.join(__dirname, '../build/favicon.ico');
+const iconPath = path.join(__dirname, mode === 'dev'?'favicon.ico':'../build/favicon.ico');
 
 // 图标的上下文菜单
 const contextMenu = Menu.buildFromTemplate(trayMenuTemplate);
@@ -37,7 +37,7 @@ function createWindow () {
    // resizable:false,
    frame:false,
    transparent: true,
-   icon: path.join(__dirname, '../build/favicon.ico'),
+   icon: path.join(__dirname, mode === 'dev'?'favicon.ico':'../build/favicon.ico'),
    webPreferences: {
     preload: path.join(__dirname, '/preload.js'),
    enableRemoteModule: true

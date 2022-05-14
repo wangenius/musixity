@@ -1,0 +1,38 @@
+@import "variant";
+.HeaderBar{
+  @extend .canDrag;
+  @extend .center;
+  padding: 0 5px;
+  position: relative;
+  display: flex;
+  z-index: $lay10;
+
+  //search bar
+  .searchInput{
+    @extend .input;
+    flex: 1;
+    font-size: 16px;
+    margin: 3px 300px;
+  }
+
+  .textIconBtn{
+    //@extend .textIconBtnActive;
+    margin: 0;
+    p{
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    &:hover{
+
+      background-color: var(--gray1-3);
+
+      p{
+        color: var(--color);
+      }
+    }
+  }
+}
+
+
+

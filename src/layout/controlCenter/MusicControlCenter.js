@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {
+    ArrowRight,
     CloseFullscreen,
     Comment,
     Favorite,
@@ -18,7 +19,7 @@ import {
     SkipNext,
     SkipPrevious
 } from "@mui/icons-material";
-import {IconButton, Slider, styled} from "@mui/material";
+import {Hidden, IconButton, Slider, styled} from "@mui/material";
 import store from "../../reducer/store";
 import {handleLikeSongInStore} from "../../reducer/likeListReducer";
 import {deleteArray, formatDuration} from "../../util/mathUtil";
@@ -28,6 +29,7 @@ import {useNavigate} from "react-router";
 import {changeSong} from "../../reducer/musicReducer";
 import {changeRepeatPlay} from "../../reducer/repeatPlayReducer";
 import {TinyText} from "../../element/util/item";
+import Btn from "../../element/util/Button";
 
 function MusicControlCenter(props){
     const navigate =useNavigate()
@@ -35,6 +37,7 @@ function MusicControlCenter(props){
     const [song,setSong] = useState({})
     const [isFull,setIsFull] = useState(false)
     const [playlist,setPlaylist] = useState(props.playlistReducer.playlist.map(item=>item.id))
+    const control = document.getElementsByClassName("rightBar")[0];
 
     //是否加载
     const [isAudioLoad,setIsAudioLoad] =useState(false)
@@ -166,6 +169,13 @@ function MusicControlCenter(props){
     const handleLyric = (time) => {
         audio.currentTime =time
     }
+
+    const SwitchControlVisible = () => {
+        document.getElementsByClassName("musicControl")[0].classList.remove("fullScreen");
+        setIsFull(false)
+        control.classList.contains("miniBar")? control.classList.remove("miniBar"):control.classList.add("miniBar");
+
+    }
     const setFullScreen = () => {
         isFull?
             document.getElementsByClassName("musicControl")[0].classList.remove("fullScreen"):
@@ -180,6 +190,11 @@ function MusicControlCenter(props){
                        autoPlay
                        src={url}/>
 
+                <Box  className={"collapseBox"}  onClick={SwitchControlVisible} >
+                    <Box className={"collapseBtn"}/>
+                </Box>
+
+                <Box className={'SubMusicControl'}>
                 <Box id={"musicInfo"}>
                     <Box className={"musicCover"}>
                         <img className={"coverImg"}
@@ -309,6 +324,7 @@ function MusicControlCenter(props){
                     </Button>
                 </Box>
 
+                </Box>
             </Box>
 
         )

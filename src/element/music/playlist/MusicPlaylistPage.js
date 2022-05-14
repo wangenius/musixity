@@ -1,11 +1,9 @@
 import Box from "@mui/material/Box";
 import {toGetAllSongsInPlaylist, toGetPlaylistDetails} from "../../../routers/musicApi";
-import {Card, CardMedia, List} from "@mui/material";
-import {Fragment, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import WaitLoad from "../../util/WaitLoad";
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import InfiniteScroll from "react-infinite-scroll-component";
-import Typography from "@mui/material/Typography";
 import {PlaylistCover} from "./PlaylistCover";
 import {PlayListSongItem} from "./PlaylistItem";
 
@@ -25,7 +23,7 @@ function MusicPlaylistPage(props){
     },[props.albumReducer.albumID])
 
     useEffect(()=>{
-        // console.log(list.id)
+        // console.log(list)
         getMore()
     },[list])
 
@@ -55,9 +53,9 @@ function MusicPlaylistPage(props){
 
 
         return(
-            <Fragment>
+            <Box className={"playlistPage"}>
 
-                <PlaylistCover name={list.name} imgUrl={list.coverImgUrl} description={list.trackCount + "首"} />
+                <PlaylistCover list={list}/>
 
 
                 <InfiniteScroll
@@ -90,7 +88,7 @@ function MusicPlaylistPage(props){
                         }
                 </InfiniteScroll>
 
-            </Fragment>
+            </Box>
         )
 
 }

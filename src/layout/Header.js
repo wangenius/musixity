@@ -97,7 +97,7 @@ function Header(props) {
                     <Btn iconItem={<IconUser/>} className={"textIconBtn"} onClick={() => navigate("/login")} name={"LOGIN"}/>
             }
             {/*<Btn icon={<Settings/>} onClick={()=>{}}/>*/}
-            <Box sx={{width: '20px'}}/>
+            <Box sx={{width: '10px'}}/>
             <Btn iconItem={<Brightness5 />} className={"iconBtn"} onClick={()=>{
                 document.documentElement.dataset.theme = theme?"blue":"dark"
                 setTheme(!theme)
